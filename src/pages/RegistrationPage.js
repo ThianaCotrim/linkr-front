@@ -1,7 +1,19 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Form, Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function RegistrationPage(){
+
+    const [form, setForm] = useState({email: "", password: "", name:"", profileImage: ""})
+
+    function handleForm(e){
+        setForm({...form, [e.target.name]: e.target.value})
+    }
+
+    function submitForm(e){
+        e.preventDefault()
+        // continuar aqui
+    }
 
     return (
         <Container>
@@ -11,13 +23,46 @@ export default function RegistrationPage(){
           </LeftBox>
           <DirectBox>
             <Box>
-              <Input placeholder="e-mail"></Input>
-              <Input placeholder="password"></Input>
-              <Input placeholder="username"></Input>
-              <Input placeholder="picture url"></Input>
-              <button>Sing Up</button>
+            <Form onSubmit={submitForm}>
+              <Input 
+              placeholder="e-mail" 
+              type="email" 
+              autoComplete="email"
+              required
+              name="email"
+              value={form.email}
+              onChange={handleForm}
+              />
+              <Input 
+              placeholder="password" 
+              type="password"
+              required
+              name="password"
+              value={form.password}
+              onChange={handleForm}
+              />
+              <Input 
+              placeholder="username" 
+              type="text" 
+              required
+              name="name"
+              value={form.name}
+              onChange={handleForm}
+              />
+              <Input 
+              placeholder="picture url" 
+              type="url"
+              required
+              name="profileImage"
+              value={form.profileImage}
+              onChange={handleForm}
+              />
+              <button type="submit">Sing Up</button>
+              </Form>
+
               <Link to="/">
-              <h3>Switch back to log in</h3></Link>
+              <h3>Switch back to log in</h3>
+              </Link>   
             </Box>
           </DirectBox>
         </Container>
