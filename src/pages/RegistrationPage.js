@@ -1,10 +1,13 @@
+
+import axios from "axios";
 import { useState } from "react";
-import { Form, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function RegistrationPage(){
 
     const [form, setForm] = useState({email: "", password: "", name:"", profileImage: ""})
+    const navigate = useNavigate()
 
     function handleForm(e){
         setForm({...form, [e.target.name]: e.target.value})
@@ -12,7 +15,14 @@ export default function RegistrationPage(){
 
     function submitForm(e){
         e.preventDefault()
-        // continuar aqui
+
+        if (form.email  === "") return alert("Todos os campos são obrigatórios!")
+
+        const url = "http://localhost:5000/singup"
+     
+      axios.post(url, form)
+      .then(res => navigate("/"))
+      .catch(err => alert(err.response.data))
     }
 
     return (
@@ -22,13 +32,14 @@ export default function RegistrationPage(){
             <h2>save, share and discover the best links on the web</h2>
           </LeftBox>
           <DirectBox>
+          
             <Box>
-            <Form onSubmit={submitForm}>
+            <form onSubmit={submitForm}>
               <Input 
               placeholder="e-mail" 
               type="email" 
               autoComplete="email"
-              required
+              
               name="email"
               value={form.email}
               onChange={handleForm}
@@ -36,7 +47,7 @@ export default function RegistrationPage(){
               <Input 
               placeholder="password" 
               type="password"
-              required
+              
               name="password"
               value={form.password}
               onChange={handleForm}
@@ -44,7 +55,7 @@ export default function RegistrationPage(){
               <Input 
               placeholder="username" 
               type="text" 
-              required
+              
               name="name"
               value={form.name}
               onChange={handleForm}
@@ -52,18 +63,22 @@ export default function RegistrationPage(){
               <Input 
               placeholder="picture url" 
               type="url"
-              required
+              
               name="profileImage"
               value={form.profileImage}
               onChange={handleForm}
               />
+              
               <button type="submit">Sing Up</button>
-              </Form>
-
+              </form> 
+             
+             
               <Link to="/">
               <h3>Switch back to log in</h3>
-              </Link>   
+              </Link>  
+             
             </Box>
+           
           </DirectBox>
         </Container>
     )
@@ -132,6 +147,7 @@ const Box = styled.div`
   display:flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   margin-top: 265px;
   flex-direction: column;
 
@@ -146,7 +162,7 @@ const Box = styled.div`
 
   button{
   background-color: #1877F2;
-  width: 449px;
+  width: 450px;
   height: 50px;
   padding: 10px;
   border: 1px solid gray;
@@ -158,5 +174,7 @@ const Box = styled.div`
   display: flex;
   text-align: center;
   justify-content: center;
+  align-items: center;
+  margin-left: 43px;
   }
 `
