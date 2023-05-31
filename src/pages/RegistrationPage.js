@@ -60,7 +60,6 @@ export default function RegistrationPage(){
               <Input 
               placeholder="username" 
               type="text" 
-              
               name="name"
               value={form.name}
               onChange={handleForm}
@@ -68,16 +67,12 @@ export default function RegistrationPage(){
               <Input 
               placeholder="picture url" 
               type="url"
-              
               name="profileImage"
               value={form.profileImage}
               onChange={handleForm}
               />
-              
               <button type="submit" disabled={isSubmit}> {isSubmit ? "Enviando..." : "Sing Up" }</button>
               </form> 
-             
-             
               <Link to="/">
               <h3>Switch back to log in</h3>
               </Link>  
