@@ -12,14 +12,11 @@ export default function RegistrationPage() {
 	});
 	const [isSubmit, setIsSubmit] = useState(false);
 	const navigate = useNavigate();
-
 	function handleForm(e) {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	}
-
 	function submitForm(e) {
 		e.preventDefault();
-
 		if (
 			form.email === "" ||
 			form.password === "" ||
@@ -28,11 +25,8 @@ export default function RegistrationPage() {
 		) {
 			return alert("Todos os campos são obrigatórios!");
 		}
-
 		const url = "http://localhost:5000/singup";
-
 		setIsSubmit(true);
-
 		axios
 			.post(url, form)
 			.then((res) => navigate("/"))
@@ -43,65 +37,60 @@ export default function RegistrationPage() {
 				setIsSubmit(false);
 			});
 	}
-
 	return (
-		<Container>
-			<LeftBox>
-				<h1>linkr</h1>
-				<h2>save, share and discover the best links on the web</h2>
-			</LeftBox>
-			<DirectBox>
-				<Box>
-					<form onSubmit={submitForm}>
-						<Input
-							placeholder="e-mail"
-							type="email"
-							autoComplete="email"
-							name="email"
-							value={form.email}
-							onChange={handleForm}
-						/>
-						<Input
-							placeholder="password"
-							type="password"
-							name="password"
-							value={form.password}
-							onChange={handleForm}
-						/>
-						<Input
-							placeholder="username"
-							type="text"
-							name="name"
-							value={form.name}
-							onChange={handleForm}
-						/>
-						<Input
-							placeholder="picture url"
-							type="url"
-							name="profileImage"
-							value={form.profileImage}
-							onChange={handleForm}
-						/>
-
-						<button type="submit" disabled={isSubmit}>
-							{" "}
-							{isSubmit ? "Enviando..." : "Sing Up"}
-						</button>
-					</form>
-
-					<Link to="/">
-						<h3>Switch back to log in</h3>
-					</Link>
-				</Box>
-			</DirectBox>
-		</Container>
-	);
-					<Link to="/">
-						<h3>Switch back to log in</h3>
-					</Link>
-				</Box>
-			</DirectBox>
-		</Container>
+		<>
+			<Container>
+				<LeftBox>
+					<h1>linkr</h1>
+					<h2>save, share and discover the best links on the web</h2>
+				</LeftBox>
+				<DirectBox>
+					<Box>
+						<form onSubmit={submitForm}>
+							<Input
+								placeholder="e-mail"
+								type="email"
+								autoComplete="email"
+								name="email"
+								value={form.email}
+								onChange={handleForm}
+							/>
+							<Input
+								placeholder="password"
+								type="password"
+								name="password"
+								value={form.password}
+								onChange={handleForm}
+							/>
+							<Input
+								placeholder="username"
+								type="text"
+								name="name"
+								value={form.name}
+								onChange={handleForm}
+							/>
+							<Input
+								placeholder="picture url"
+								type="url"
+								name="profileImage"
+								value={form.profileImage}
+								onChange={handleForm}
+							/>
+							<button type="submit" disabled={isSubmit}>
+								{" "}
+								{isSubmit ? "Enviando..." : "Sing Up"}
+							</button>
+						</form>
+						<Link to="/">
+							<h3>Switch back to log in</h3>
+						</Link>
+					</Box>
+				</DirectBox>
+			</Container>
+			<Link to="/">
+				<h3>Switch back to log in</h3>
+			</Link>
+		</>
 	);
 }
 
@@ -110,7 +99,6 @@ const Container = styled.div`
 	display: flex;
 	width: 100%;
 	justify-content: center;
-`;
 	height: 1024px;
 	display: flex;
 	width: 100%;
@@ -163,7 +151,6 @@ const LeftBox = styled.div`
 		margin-left: 144px;
 		margin-top: 0px;
 	}
-`;
 	h2 {
 		color: #ffffff;
 		height: 128px;
@@ -183,7 +170,6 @@ const DirectBox = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-`;
 	background-color: gray;
 	width: 535px;
 	height: 100%;
@@ -201,7 +187,6 @@ const Input = styled.input`
 	color: #9f9f9f;
 	font-size: 20px;
 	font-family: "Oswald", sans-serif;
-`;
 	padding: 10px;
 	border: 1px solid hsl(0, 0%, 80%);
 	border-radius: 6px;
