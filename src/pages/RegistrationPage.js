@@ -7,6 +7,7 @@ import styled from "styled-components";
 export default function RegistrationPage(){
 
     const [form, setForm] = useState({email: "", password: "", name:"", profileImage: ""})
+    const [isSubmit, setIsSubmit] = useState(false)
     const navigate = useNavigate()
 
     function handleForm(e){
@@ -16,13 +17,19 @@ export default function RegistrationPage(){
     function submitForm(e){
         e.preventDefault()
 
-        if (form.email  === "") return alert("Todos os campos são obrigatórios!")
+        if (form.email === '' || form.password === '' || form.name === '' || form.profileImage === '') {
+          return alert('Todos os campos são obrigatórios!')}
 
         const url = "http://localhost:5000/singup"
+
+        setIsSubmit(true)
      
       axios.post(url, form)
       .then(res => navigate("/"))
-      .catch(err => alert(err.response.data))
+      .catch(err => alert("Esse e-mail já existe, faça login ou tente outro e-mail!"))
+      .finally(() => {
+        setIsSubmit(false)
+      })
     }
 
     return (
@@ -39,7 +46,6 @@ export default function RegistrationPage(){
               placeholder="e-mail" 
               type="email" 
               autoComplete="email"
-              
               name="email"
               value={form.email}
               onChange={handleForm}
@@ -47,7 +53,6 @@ export default function RegistrationPage(){
               <Input 
               placeholder="password" 
               type="password"
-              
               name="password"
               value={form.password}
               onChange={handleForm}
@@ -69,7 +74,7 @@ export default function RegistrationPage(){
               onChange={handleForm}
               />
               
-              <button type="submit">Sing Up</button>
+              <button type="submit" disabled={isSubmit}> {isSubmit ? "Enviando..." : "Sing Up" }</button>
               </form> 
              
              

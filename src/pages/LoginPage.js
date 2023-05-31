@@ -1,24 +1,87 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export default function LoginPage(){
-    return (
-        <Container>
-          <LeftBox>
-            <h1>linkr</h1>
-            <h2>save, share and discover the best links on the web</h2>
-          </LeftBox>
-          <DirectBox>
-            <Box>
-              <Input placeholder="e-mail"></Input>
-              <Input placeholder="password"></Input>
-              <button>Log In</button>
-              <Link to="/registration">
-                <h3>First time? Create an account!</h3></Link>
-            </Box>
-          </DirectBox>
-        </Container>
-      )
+export default function LoginPage() {
+
+  const [form, setForm] = useState({ email: "", password: "" })
+  const [isSubmit, setIsSubmit] = useState(false)
+  const navigate = useNavigate()
+
+
+  useEffect(() => {
+    const userToken = localStorage.getItem('userToken');
+    if (userToken) {
+      navigate('/timeline');
+    }
+  }, [navigate]);
+
+  
+  function handleForm(e) {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
+
+  function submitForm(e) {
+    e.preventDefault()
+
+    if (form.email === '' || form.password === '') return alert('Todos os campos são obrigatórios!')
+
+    const url = "http://localhost:5000/singin"
+
+    setIsSubmit(true)
+
+    axios.post(url, form)
+      .then((res) => {
+        localStorage.setItem('userToken', res.data.token);
+        navigate("/timeline")
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          alert('E-mail ou senha incorretos!');
+        } else {
+          alert('Ocorreu um erro. Por favor, tente novamente.');
+        }
+      })
+      .finally(() => {
+        setIsSubmit(false);
+      });
+  }
+
+
+  return (
+    <Container>
+      <LeftBox>
+        <h1>linkr</h1>
+        <h2>save, share and discover the best links on the web</h2>
+      </LeftBox>
+      <DirectBox>
+        <Box>
+          <form onSubmit={submitForm}>
+            <Input
+              placeholder="e-mail"
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleForm}
+            />
+
+            <Input
+              placeholder="password"
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleForm}
+            />
+            <button type="submit" disabled={isSubmit}> {isSubmit ? "Enviando..." : "Log In"}</button>
+          </form>
+          <Link to="/registration">
+            <h3>First time? Create an account!</h3></Link>
+        </Box>
+      </DirectBox>
+    </Container>
+  )
 }
 
 const Container = styled.div`
@@ -84,6 +147,7 @@ const Box = styled.div`
   display:flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   margin-top: 310px;
   flex-direction: column;
 
@@ -98,7 +162,7 @@ const Box = styled.div`
 
   button{
   background-color: #1877F2;
-  width: 449px;
+  width: 450px;
   height: 50px;
   padding: 10px;
   border: 1px solid gray;
@@ -108,8 +172,9 @@ const Box = styled.div`
   font-family: 'Oswald', sans-serif;
   font-size: 20px;
   display: flex;
-  text-align: center;
   justify-content: center;
+  align-items: center;
+  margin-left: 44px; 
   }
 `
 
