@@ -10,12 +10,12 @@ export default function LoginPage() {
   const navigate = useNavigate()
 
 
-  useEffect(() => {
-    const userToken = localStorage.getItem('userToken');
-    if (userToken) {
-      navigate('/timeline');
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   const userToken = localStorage.getItem('userToken');
+  //   if (userToken) {
+  //     navigate('/timeline');
+  //   }
+  // }, []);
 
   
   function handleForm(e) {

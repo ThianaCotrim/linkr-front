@@ -10,10 +10,16 @@ export default function TimelinePage (){
 
   
     return (
-
+        <>
+        <Header>
+            <HeaderBox>
+            linkr
+            </HeaderBox>
+        </Header>
 		<MainContainer>
-
+           
 			<TimelineContainer>
+                
 
 				<MainTitle>timeline</MainTitle>
 
@@ -28,7 +34,7 @@ export default function TimelinePage (){
 			</TimelineContainer>
 
 		</MainContainer>
-
+        </>
 	);
 
 };
@@ -40,14 +46,33 @@ export default function TimelinePage (){
     min-height: 100vh;
     height: 100%;
     background: #333333;
-    margin-top: 72px;
+    margin-top: 0px;
     display: flex;
     justify-content: center;
     @media (max-width: 710px){
         width: 100vw;
+    }
+`
+
+const Header = styled.div`
+
+height: 72px;
+background-color: #151515;
+width: 100%;
+display: flex;
+
+align-items: center;
+
 
 `
 
+const HeaderBox = styled.div`
+color: white;
+font-family: 'Passion One', cursive;
+font-size: 49px;
+line-height: 54px;
+`
+    
  const TimelineContainer = styled.div`
 
     display: flex;
@@ -74,4 +99,4 @@ export default function TimelinePage (){
     }
 
 `
-
+    
