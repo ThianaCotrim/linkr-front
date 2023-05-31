@@ -1,5 +1,6 @@
 import LoginPage from "./pages/LoginPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RegistrationPage from "./pages/RegistrationPage";
 import TimelinePage from "./pages/TimelinePage";
 import SpecificHashtagTimeline from "./pages/SpecificHashtagTimeline";
