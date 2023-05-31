@@ -90,13 +90,34 @@ const Container = styled.div`
 	width: 100%;
 	justify-content: center;
 `;
+	height: 1024px;
+	display: flex;
+	width: 100%;
+	justify-content: center;
+`;
 
 const LeftBox = styled.div`
 	background: #151515;
 	box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
 	width: 905px;
 	height: 100%;
+	background: #151515;
+	box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
+	width: 905px;
+	height: 100%;
 
+	h1 {
+		color: #ffffff;
+		font-size: 106px;
+		width: 233px;
+		font-weight: 700;
+		margin-top: 301px;
+		margin-left: 144px;
+		font-family: "Passion One", cursive;
+		line-height: 116.71px;
+		letter-spacing: 5px;
+		margin-bottom: 0px;
+	}
 	h1 {
 		color: #ffffff;
 		font-size: 106px;
@@ -122,6 +143,18 @@ const LeftBox = styled.div`
 		margin-top: 0px;
 	}
 `;
+	h2 {
+		color: #ffffff;
+		height: 128px;
+		width: 442px;
+		font-family: "Oswald", sans-serif;
+		font-size: 43px;
+		font-weight: 700;
+		line-height: 63.73px;
+		margin-left: 144px;
+		margin-top: 0px;
+	}
+`;
 
 const DirectBox = styled.div`
 	background-color: gray;
@@ -130,8 +163,24 @@ const DirectBox = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
+	background-color: gray;
+	width: 535px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+`;
 
 const Input = styled.input`
+	padding: 10px;
+	border: 1px solid hsl(0, 0%, 80%);
+	border-radius: 6px;
+	margin-top: 13px;
+	width: 429px;
+	height: 30px;
+	color: #9f9f9f;
+	font-size: 20px;
+	font-family: "Oswald", sans-serif;
+`;
 	padding: 10px;
 	border: 1px solid hsl(0, 0%, 80%);
 	border-radius: 6px;
@@ -151,6 +200,14 @@ const Box = styled.div`
   margin-top: 310px;
   flex-direction: column;
 
+	h3 {
+		color: #ffffff;
+		font-family: "Lato", sans-serif;
+		font-size: 20px;
+		font-weight: 400;
+		line-height: 24px;
+		text-decoration-line: underline;
+	}
 	h3 {
 		color: #ffffff;
 		font-family: "Lato", sans-serif;
