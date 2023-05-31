@@ -2,19 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-export default function Hashtags() {
+export default function HashtagsBox() {
 	const [topHashtags, setTopHashtags] = useState([]);
 	const PORT = "http://localhost:5000";
-	const token = "";
-	console.log(PORT);
 	useEffect(() => {
-		const config = {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		};
 		axios
-			.get(`${PORT}/hashtag`, null, config)
+			.get(`${PORT}/hashtag`)
 			.then((r) => {
 				console.log(r.data);
 				setTopHashtags(r.data);
@@ -30,7 +23,7 @@ export default function Hashtags() {
 				{topHashtags.length === 0 ? (
 					<p>Sem trendings</p>
 				) : (
-					topHashtags.map((h, index) => <li key={index}> {h.hashtags}</li>)
+					topHashtags.map((h, index) => <li key={index}> {h.hashtag}</li>)
 				)}
 			</ul>
 		</HashtagsStyle>
@@ -40,8 +33,8 @@ const HashtagsStyle = styled.div`
 	position: absolute;
 	width: 301px;
 	height: 406px;
-	left: 877px;
-	top: 232px;
+	right: 16.4%;
+	top: 21.5%;
 	background: #171717;
 	border-radius: 16px;
 	box-sizing: border-box;
@@ -74,6 +67,11 @@ const HashtagsStyle = styled.div`
 			letter-spacing: 0.05em;
 			color: #ffffff;
 			font-family: "Lato", sans-serif;
+			margin-bottom: 10px;
+			::before {
+				content: "#";
+				margin-right: 2px;
+			}
 		}
 		p {
 			color: white;
