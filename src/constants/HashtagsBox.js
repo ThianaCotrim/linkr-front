@@ -6,6 +6,7 @@ export default function Hashtags() {
 	const [topHashtags, setTopHashtags] = useState([]);
 	const PORT = "http://localhost:5000";
 	const token = "";
+	console.log(PORT);
 	useEffect(() => {
 		const config = {
 			headers: {
