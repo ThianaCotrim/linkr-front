@@ -30,7 +30,7 @@ export default function PostsList() {
 					<SinglePost post={post}/>
 				)
 			}) : 
-			<>
+		<PostListContainer>
 			<ThreeDots
 				height="80"
 				width="80"
@@ -48,7 +48,6 @@ export default function PostsList() {
 			<MessageEmpty data-test="message">
 				You don't follow anyone yet. Search for new friends!
 			</MessageEmpty></>}
-			
 		</PostListContainer>
 	);
 }
@@ -76,3 +75,4 @@ const MessageEmpty = styled.p`
 	font-size: 30px;
 	font-weight: 400;
 `;
+

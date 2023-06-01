@@ -3,75 +3,78 @@ import InfiniteScroll from "react-infinite-scroller";
 import PostCreation from "../components/PostsComponents/CreatePost";
 import PostsList from "../components/PostsComponents/PostsList";
 
-
 //import MorePostsScroller from "../components/PostsComponents/MorePostsScroller";
 
-export default function TimelinePage (){
+export default function TimelinePage() {
+	return (
+		<>
+			<Header>
+				<HeaderBox>linkr</HeaderBox>
+			</Header>
+			<MainContainer>
+				<TimelineContainer>
+					<MainTitle>timeline</MainTitle>
 
-  
-    return (
+					<PostCreation />
 
-		<MainContainer>
-
-			<TimelineContainer>
-
-				<MainTitle>timeline</MainTitle>
-
-				<PostCreation  />
-
-				<InfiniteScroll>
-
-					<PostsList />
-
-				</InfiniteScroll>
-
-			</TimelineContainer>
-
-		</MainContainer>
-
+					<InfiniteScroll>
+						<PostsList />
+					</InfiniteScroll>
+				</TimelineContainer>
+			</MainContainer>
+		</>
 	);
-
-};
+}
 
 //<MorePostsScroller key={0} /> aplicar dentro de infinitescroll
 
- const MainContainer = styled.div`
+const MainContainer = styled.div`
+	min-height: 100vh;
+	height: 100%;
+	background: #333333;
+	margin-top: 0px;
+	display: flex;
+	justify-content: center;
+	@media (max-width: 710px) {
+		width: 100vw;
+	}
+`;
 
-    min-height: 100vh;
-    height: 100%;
-    background: #333333;
-    margin-top: 72px;
-    display: flex;
-    justify-content: center;
-    @media (max-width: 710px){
-        width: 100vw;
+const Header = styled.div`
+	height: 72px;
+	background-color: #151515;
+	width: 100%;
+	display: flex;
 
-`
+	align-items: center;
+`;
 
- const TimelineContainer = styled.div`
+const HeaderBox = styled.div`
+	color: white;
+	font-family: "Passion One", cursive;
+	font-size: 49px;
+	line-height: 54px;
+`;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+const TimelineContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+`;
 
-`
-
- const MainTitle = styled.p`
-
-    font-family: "Oswald";
-    font-weight: 700;
-    font-size: 43px;
-    line-height: 60px;
-    color: #FFFFFF;
-    width: 610px;
-    text-align: left;
-    margin-bottom: 40px;
-    margin-top: 1rem;
-    @media (max-width: 710px){
-        width: 100vw;
-        margin-left: 1.5rem;
-    }
-
-`
-
+const MainTitle = styled.p`
+	font-family: "Oswald";
+	font-weight: 700;
+	font-size: 43px;
+	line-height: 60px;
+	color: #ffffff;
+	width: 610px;
+	text-align: left;
+	margin-bottom: 40px;
+	margin-top: 1rem;
+	@media (max-width: 710px) {
+		width: 100vw;
+		margin-left: 1.5rem;
+	}
+`;
