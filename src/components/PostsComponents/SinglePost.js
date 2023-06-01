@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export default function singlePost (){
-
+export default function SinglePost (post){
+  const {username, description, link, likes, image, metatitle, metadescript, metaimage} = post
     return (
 
 		<ContainerSinglePost>
@@ -10,7 +10,7 @@ export default function singlePost (){
 
 				<SideBar>
 
-					<ProfilePhoto  />
+					<ProfilePhoto  src={image}/>
 
           </SideBar>
 
@@ -18,23 +18,23 @@ export default function singlePost (){
 
 					<PostTop>
 
-						<UserName data-test="username" ></UserName>
+						<UserName data-test="username" >{username}</UserName>
 
           </PostTop>
 
-              <Description data-test="description"></Description>
+              <Description data-test="description">{description}</Description>
 
         <ContainerMetadata data-test="link" >
 
 					<MetadataBox>
 
-							<MetaTitle></MetaTitle>
-							<MetaDescrip></MetaDescrip>
-							<MetaLink></MetaLink>
+							<MetaTitle>{metatitle}</MetaTitle>
+							<MetaDescrip>{metadescript}</MetaDescrip>
+							<MetaLink>{link}</MetaLink>
 
 					</MetadataBox>
 
-						<MetaPhoto />
+						<MetaPhoto src={metaimage}/>
 
 					</ContainerMetadata>
 
@@ -220,5 +220,3 @@ const ContentBox = styled.div`
   margin-top: 0.5rem;
   
 `;
-
- 
