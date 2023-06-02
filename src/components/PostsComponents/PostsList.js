@@ -1,11 +1,36 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import styled from "styled-components";
+import SinglePost from "./SinglePost.js";
 
 //import singlePost from "./SinglePost";//
 
 export default function PostsList() {
+	const [postList, setPostList] = useState(null)
+	const token = localStorage.getItem("userToken")
+	console.log(token)
+	useEffect(() => {
+		const url = `http://localhost:5000/posts`
+		const headers = {headers: {authorization: `Bearer ${token}`}}
+		axios
+			.get(url, headers)
+				.then((res) => setPostList(res.data))
+					.catch((err) => alert("An error occured while trying to fetch the posts, please refresh the page"))
+		
+	}, [])
+	console.log(postList)
 	return (
 		<PostListContainer>
+			{postList 
+			? postList.length === 0 
+			? <MessageEmpty>There are no posts yet</MessageEmpty>
+			: postList.map((post) => {
+				return(
+					<SinglePost post={post}/>
+				)
+			}) : 
+			<>
 			<ThreeDots
 				height="80"
 				width="80"
@@ -22,7 +47,8 @@ export default function PostsList() {
 			:
 			<MessageEmpty data-test="message">
 				You don't follow anyone yet. Search for new friends!
-			</MessageEmpty>
+			</MessageEmpty></>}
+			
 		</PostListContainer>
 	);
 }
