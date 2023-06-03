@@ -1,14 +1,9 @@
-
 import { TailSpin } from "react-loader-spinner";
-import styled from 'styled-components'
-
+import styled from "styled-components";
 
 export default function MorePostsScroller() {
-
 	return (
-
 		<MorePostsScrollerContainer>
-
 			<TailSpin
 				height="40"
 				width="40"
@@ -17,17 +12,15 @@ export default function MorePostsScroller() {
 				radius="0"
 				wrapperStyle={{}}
 				wrapperClass=""
-				visible={true}/>
+				visible={true}
+			/>
 
 			<p>Loading more posts...</p>
-            
 		</MorePostsScrollerContainer>
-
 	);
 }
 
 const MorePostsScrollerContainer = styled.div`
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -44,8 +37,5 @@ const MorePostsScrollerContainer = styled.div`
 		letter-spacing: 0.05em;
 		color: #6d6d6d;
 		margin-top: 15px;
-
 	}
-
 `;
-
