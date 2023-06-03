@@ -1,54 +1,59 @@
 import styled from "styled-components";
 
-export default function SinglePost (post){
-  const {username, description, link, likes, image, metatitle, metadescript, metaimage} = post
-    return (
+export default function SinglePost({ post }) {
+  const { username, description, link, likes, image, metatitle, metadescript, metaimage } = post
+  function handleClick() {
+    window.open(link, '_blank')
+  }
+  return (
 
-		<ContainerSinglePost>
+    <ContainerSinglePost>
 
-			<Post data-test="post">
+      <Post data-test="post">
 
-				<SideBar>
+        <SideBar>
 
-					<ProfilePhoto  src={image}/>
+          <ProfilePhoto src={image} />
 
-          </SideBar>
+        </SideBar>
 
-				<ContentBox>
+        <ContentBox>
 
-					<PostTop>
+          <PostTop>
 
-						<UserName data-test="username" >{username}</UserName>
+            <UserName data-test="username" >{username}</UserName>
 
           </PostTop>
 
-              <Description data-test="description">{description}</Description>
+          <Description data-test="description">{description}</Description>
 
-        <ContainerMetadata data-test="link" >
+          <ContainerMetadata data-test="link" onClick={handleClick}>
+            <MetadataBox>
 
-					<MetadataBox>
+              <MetaTitle>{metatitle}</MetaTitle>
+              <MetaDescrip>{metadescript}</MetaDescrip>
+              <MetaLink>{link}</MetaLink>
 
-							<MetaTitle>{metatitle}</MetaTitle>
-							<MetaDescrip>{metadescript}</MetaDescrip>
-							<MetaLink>{link}</MetaLink>
+            </MetadataBox>
 
-					</MetadataBox>
+            <MetaPhoto src={metaimage} />
+          
 
-						<MetaPhoto src={metaimage}/>
 
-					</ContainerMetadata>
 
-				</ContentBox>
+          </ContainerMetadata>
 
-			</Post>
+        </ContentBox>
+
+      </Post>
 
     </ContainerSinglePost>
 
-         );
+  );
 
 }
 
- const ContainerSinglePost = styled.div`
+const ContainerSinglePost = styled.div`
 
   width: 100%;
   height: fit-content;
@@ -58,7 +63,7 @@ export default function SinglePost (post){
 
 `;
 
- const Post = styled.div`
+const Post = styled.div`
 
   width: 100%;
   height: fit-content;
@@ -72,7 +77,7 @@ export default function SinglePost (post){
 
 `;
 
- const SideBar = styled.div`
+const SideBar = styled.div`
 
     display: flex;
     flex-direction: column;
@@ -107,16 +112,16 @@ const ContentBox = styled.div`
 
 `;
 
- const ProfilePhoto = styled.img`
+const ProfilePhoto = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 26.5px;
   margin-bottom: 20px;
 `;
 
- 
 
- const UserName = styled.p`
+
+const UserName = styled.p`
   height: 23px;
   font-family: "Lato";
   font-weight: 400;
@@ -131,7 +136,7 @@ const ContentBox = styled.div`
 
 `;
 
- const Description = styled.p`
+const Description = styled.p`
 
   width: 100%;
   min-height: 45px;
@@ -144,7 +149,7 @@ const ContentBox = styled.div`
 
 `;
 
- const ContainerMetadata = styled.div`
+const ContainerMetadata = styled.div`
 
   width: 100%;
   height: 155px;
@@ -158,7 +163,7 @@ const ContentBox = styled.div`
 
 `;
 
- const MetadataBox = styled.div`
+const MetadataBox = styled.div`
 
   width: 350px;
   height: 100%;
@@ -169,7 +174,7 @@ const ContentBox = styled.div`
 
 `;
 
- const MetaPhoto = styled.img`
+const MetaPhoto = styled.img`
 
   width: 150px;
   height: 100%;
@@ -178,7 +183,7 @@ const ContentBox = styled.div`
 
 `;
 
- const MetaTitle = styled.p`
+const MetaTitle = styled.p`
 
   width: 300px;
   height: 40px;
@@ -192,7 +197,7 @@ const ContentBox = styled.div`
 
 `;
 
- const MetaDescrip = styled.p`
+const MetaDescrip = styled.p`
 
   width: 300px;
   height: 40px;
@@ -206,7 +211,7 @@ const ContentBox = styled.div`
 
 `;
 
- const MetaLink = styled.p`
+const MetaLink = styled.p`
 
   width: 300px;
   height: 40px;

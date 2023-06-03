@@ -7,25 +7,25 @@ import SinglePost from "./SinglePost.js";
 //import singlePost from "./SinglePost";//
 
 export default function PostsList() {
-	const [postList, setPostList] = useState(null)
 	const token = localStorage.getItem("userToken")
+	const [posts, setPosts] = useState(null)
 	console.log(token)
 	useEffect(() => {
 		const url = `http://localhost:5000/posts`
 		const headers = {headers: {authorization: `Bearer ${token}`}}
 		axios
 			.get(url, headers)
-				.then((res) => setPostList(res.data))
+				.then((res) => setPosts(res.data))
 					.catch((err) => alert("An error occured while trying to fetch the posts, please refresh the page"))
 		
 	}, [])
-	console.log(postList)
+	console.log()
 	return (
 		<PostListContainer>
-			{postList 
-			? postList.length === 0 
+			{posts 
+			? posts.length === 0 
 			? <MessageEmpty>There are no posts yet</MessageEmpty>
-			: postList.map((post) => {
+			: posts.map((post) => {
 				return(
 					<SinglePost post={post}/>
 				)
