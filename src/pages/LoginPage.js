@@ -112,8 +112,6 @@ const Container = styled.div`
        height: 200vw;
    }
 `;
-
-
 const LeftBox = styled.div`
    background: #151515;
    box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
@@ -127,8 +125,6 @@ const LeftBox = styled.div`
        width: 100vw;
        height: 60vw;
    }
-
-
    h1 {
        color: #ffffff;
        font-size: 106px;
@@ -165,9 +161,8 @@ const LeftBox = styled.div`
            margin-left: 27vw;
        }
    }
+
 `;
-
-
 const DirectBox = styled.div`
    background-color: gray;
    width: 535px;
@@ -209,8 +204,6 @@ const Input = styled.input`
        width: 70vw;
    }
 `;
-
-
 const Box = styled.div`
    display: flex;
    justify-content: center;
@@ -221,8 +214,6 @@ const Box = styled.div`
    @media(max-width: 375px){
        margin-top: 10vw;
    }
-
-
    h3 {
        color: #ffffff;
        font-family: "Lato", sans-serif;
@@ -236,8 +227,6 @@ const Box = styled.div`
            margin-top: 5vw;
        }
    }
-
-
    button {
        background-color: #1877f2;
        width: 450px;
@@ -257,4 +246,5 @@ const Box = styled.div`
            width: 77vw;
        }
    }
+
 `;
