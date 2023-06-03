@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React  from "react";
 import styled from "styled-components";
+import {SlPencil} from "react-icons/sl"
 
 export default function SinglePost({ post }) {
   const { username, description, link, likes, image, metatitle, metadescript, metaimage } = post
@@ -141,6 +142,7 @@ const Description = styled.p`
   color: #b7b7b7;
   margin-top: 10px;
 `;
+
 const EditIcon = styled(SlPencil)`
   margin-left: 5px;
   cursor: pointer;
