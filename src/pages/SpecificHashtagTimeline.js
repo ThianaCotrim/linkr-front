@@ -4,11 +4,14 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import HashtagsBox from "../constants/HashtagsBox";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import hashtagContext from "../context/hashtag.context";
 
 export default function SpecificHashtagTimeline() {
 	const [logout, setLogout] = useState(false);
 	const navigate = useNavigate();
+	const { hashtagTitle, hashtagsInfo } = useContext(hashtagContext);
+	console.log(hashtagsInfo);
 	function exit() {
 		navigate("/");
 	}
@@ -43,27 +46,31 @@ export default function SpecificHashtagTimeline() {
 			</Header>
 			<Container>
 				<div>
-					<h1># texto</h1>
-					<PostDiv>
-						<ProfileInfo>
-							<img src={logo} alt="profileImage" />
-							<AiOutlineHeart
-								style={{
-									color: "white",
-									width: "70%",
-									height: "10%",
-									marginTop: "15%",
-								}}
-							/>
-						</ProfileInfo>
-						<Description>
-							<p>Nome</p>
-							<p>Descrição do post #PeideiEsai</p>
-							<p style={{ color: "white", marginLeft: "2%", marginTop: "2%" }}>
-								Aqui vai ir uma imagem ou link de matéria caso tenha
-							</p>
-						</Description>
-					</PostDiv>
+					<h1># {hashtagTitle}</h1>
+					{hashtagsInfo.map((p) => (
+						<PostDiv>
+							<ProfileInfo>
+								<img src={p.profileImage} alt="profileImage" />
+								<AiOutlineHeart
+									style={{
+										color: "white",
+										width: "70%",
+										height: "10%",
+										marginTop: "15%",
+									}}
+								/>
+							</ProfileInfo>
+							<Description>
+								<p>{p.name}</p>
+								<p>{p.description}</p>
+								<p
+									style={{ color: "white", marginLeft: "2%", marginTop: "2%" }}
+								>
+									{p.link}
+								</p>
+							</Description>
+						</PostDiv>
+					))}
 				</div>
 				{logout === true && (
 					<LogoutDiv>
@@ -82,6 +89,7 @@ const Container = styled.div`
 	justify-content: space-evenly;
 	background-color: #333333;
 	box-sizing: border-box;
+	overflow: hidden;
 	h1 {
 		font-family: "Oswald";
 		font-style: normal;

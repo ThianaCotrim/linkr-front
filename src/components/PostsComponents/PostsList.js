@@ -22,7 +22,6 @@ export default function PostsList() {
 				)
 			);
 	}, []);
-	console.log(postList);
 	return (
 		<PostListContainer>
 			{postList ? (

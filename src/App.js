@@ -8,9 +8,12 @@ import { useState } from "react";
 
 function App() {
 	const [hashtagsInfo, setHashtagsInfo] = useState([]);
+	const [hashtagTitle, setHashtagTitle] = useState("");
 	const info = {
 		hashtagsInfo,
 		setHashtagsInfo,
+		hashtagTitle,
+		setHashtagTitle,
 	};
 	return (
 		<hashtagContext.Provider value={info}>
@@ -19,7 +22,10 @@ function App() {
 					<Route path="/" element={<LoginPage />} />
 					<Route path="/registration" element={<RegistrationPage />} />
 					<Route path="/timeline" element={<TimelinePage />} />
-					<Route path="/hashtag" element={<SpecificHashtagTimeline />} />
+					<Route
+						path="/hashtag/:hashtag"
+						element={<SpecificHashtagTimeline />}
+					/>
 				</Routes>
 			</BrowserRouter>
 		</hashtagContext.Provider>

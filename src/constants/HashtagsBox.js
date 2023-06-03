@@ -8,13 +8,12 @@ export default function HashtagsBox() {
 	const [topHashtags, setTopHashtags] = useState([]);
 	const PORT = "http://localhost:5000";
 	const navigate = useNavigate();
-	const { setHashtagsInfo } = useContext(hashtagContext);
+	const { setHashtagsInfo, setHashtagTitle } = useContext(hashtagContext);
 	useEffect(() => {
 		axios
 			.get(`${PORT}/hashtag`)
 			.then((r) => {
 				setTopHashtags(r.data);
-				navigate("/hashtag");
 			})
 			.catch((e) => console.log(e));
 	}, []);
@@ -22,10 +21,11 @@ export default function HashtagsBox() {
 		axios
 			.get(`${PORT}/hashtag/${hashtag}`)
 			.then((r) => {
-				console.log(r.data);
 				setHashtagsInfo(r.data);
+				setHashtagTitle(hashtag);
+				navigate(`/hashtag/${hashtag}`);
 			})
-			.catch((e) => console.log(e));
+			.catch((e) => alert(e.data.message));
 	}
 	return (
 		<HashtagsStyle>
