@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import styled from "styled-components";
 
 export default function SinglePost({ post }) {
@@ -54,17 +55,14 @@ export default function SinglePost({ post }) {
 }
 
 const ContainerSinglePost = styled.div`
-
   width: 100%;
   height: fit-content;
   min-height: 275px;
   border-radius: 16px;
   margin-bottom: 15px;
-
 `;
 
 const Post = styled.div`
-
   width: 100%;
   height: fit-content;
   min-height: 275px;
@@ -74,32 +72,29 @@ const Post = styled.div`
   justify-content: space-between;
   position: relative;
   z-index: 2;
-
 `;
 
 const SideBar = styled.div`
+
 
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 17px;
     padding-right: 0px;
+`;
 
-`
 
 const PostTop = styled.div`
- 
-width: 100%;
-height: 50px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 0 5px;
-
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
 `;
 
 const ContentBox = styled.div`
-
   width: 500px;
   display: flex;
   flex-direction: column;
@@ -109,7 +104,6 @@ const ContentBox = styled.div`
     width: 80%;
     margin-right: 3rem;
   }
-
 `;
 
 const ProfilePhoto = styled.img`
@@ -118,9 +112,6 @@ const ProfilePhoto = styled.img`
   border-radius: 26.5px;
   margin-bottom: 20px;
 `;
-
-
-
 const UserName = styled.p`
   height: 23px;
   font-family: "Lato";
@@ -133,11 +124,14 @@ const UserName = styled.p`
   :hover {
     cursor: pointer;
   }
-
 `;
 
+const DescriptionContainer = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+`;
 const Description = styled.p`
-
   width: 100%;
   min-height: 45px;
   font-family: "Lato";
@@ -146,11 +140,12 @@ const Description = styled.p`
   line-height: 20px;
   color: #b7b7b7;
   margin-top: 10px;
-
 `;
-
+const EditIcon = styled(SlPencil)`
+  margin-left: 5px;
+  cursor: pointer;
+`;
 const ContainerMetadata = styled.div`
-
   width: 100%;
   height: 155px;
   background: #171717;
@@ -160,31 +155,25 @@ const ContainerMetadata = styled.div`
   margin-top: 1rem;
   cursor: pointer;
   display: flex;
-
 `;
 
 const MetadataBox = styled.div`
-
   width: 350px;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 `;
 
 const MetaPhoto = styled.img`
-
   width: 150px;
   height: 100%;
   border-top-right-radius: 11px;
   border-bottom-right-radius: 11px;
-
 `;
 
 const MetaTitle = styled.p`
-
   width: 300px;
   height: 40px;
   max-height: 40px;
@@ -194,11 +183,9 @@ const MetaTitle = styled.p`
   font-size: 16px;
   line-height: 19px;
   color: #cecece;
-
 `;
 
 const MetaDescrip = styled.p`
-
   width: 300px;
   height: 40px;
   max-height: 40px;
@@ -208,11 +195,9 @@ const MetaDescrip = styled.p`
   font-size: 11px;
   line-height: 13px;
   color: #9b9595;
-
 `;
 
 const MetaLink = styled.p`
-
   width: 300px;
   height: 40px;
   max-height: 40px;
@@ -223,5 +208,4 @@ const MetaLink = styled.p`
   line-height: 13px;
   color: #cecece;
   margin-top: 0.5rem;
-  
 `;
