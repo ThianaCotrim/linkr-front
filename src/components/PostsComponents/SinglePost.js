@@ -1,9 +1,9 @@
-import React  from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import {SlPencil} from "react-icons/sl"
+import { SlPencil } from "react-icons/sl";
+import EditPost from "./EditPost";
 
 export default function SinglePost({ post }) {
-
 	const {
 		id,
 		username,
@@ -16,27 +16,22 @@ export default function SinglePost({ post }) {
 		metaimage,
 	} = post;
 	const [isEditing, setIsEditing] = useState(false);
-
 	const handleEditClick = () => {
 		setIsEditing(true);
 	};
-
 	const handleCancelEditing = () => {
 		setIsEditing(false);
 	};
-
 	return (
 		<ContainerSinglePost>
 			<Post data-test="post">
 				<SideBar>
 					<ProfilePhoto src={image} />
 				</SideBar>
-
 				<ContentBox>
 					<PostTop>
 						<UserName data-test="username">{username}</UserName>
 					</PostTop>
-
 					{isEditing ? (
 						<EditPost
 							id={id}
@@ -49,74 +44,19 @@ export default function SinglePost({ post }) {
 							<EditIcon size={16} />
 						</DescriptionContainer>
 					)}
-
 					<ContainerMetadata data-test="link">
 						<MetadataBox>
 							<MetaTitle>{metatitle}</MetaTitle>
 							<MetaDescrip>{metadescript}</MetaDescrip>
 							<MetaLink>{link}</MetaLink>
 						</MetadataBox>
-
 						<MetaPhoto src={metaimage} />
 					</ContainerMetadata>
 				</ContentBox>
 			</Post>
 		</ContainerSinglePost>
 	);
-
-  const { username, description, link, likes, image, metatitle, metadescript, metaimage } = post
-  function handleClick() {
-    window.open(link, '_blank')
-  }
-  return (
-
-    <ContainerSinglePost>
-
-      <Post data-test="post">
-
-        <SideBar>
-
-          <ProfilePhoto src={image} />
-
-        </SideBar>
-
-        <ContentBox>
-
-          <PostTop>
-
-            <UserName data-test="username" >{username}</UserName>
-
-          </PostTop>
-
-          <Description data-test="description">{description}</Description>
-
-          <ContainerMetadata data-test="link" onClick={handleClick}>
-            <MetadataBox>
-
-              <MetaTitle>{metatitle}</MetaTitle>
-              <MetaDescrip>{metadescript}</MetaDescrip>
-              <MetaLink>{link}</MetaLink>
-
-            </MetadataBox>
-
-            <MetaPhoto src={metaimage} />
-          
-
-
-
-          </ContainerMetadata>
-
-        </ContentBox>
-
-      </Post>
-
-    </ContainerSinglePost>
-
-  );
-
-
 }
-
 const ContainerSinglePost = styled.div`
 	width: 100%;
 	height: fit-content;
@@ -124,7 +64,6 @@ const ContainerSinglePost = styled.div`
 	border-radius: 16px;
 	margin-bottom: 15px;
 `;
-
 const Post = styled.div`
 	width: 100%;
 	height: fit-content;
@@ -136,26 +75,18 @@ const Post = styled.div`
 	position: relative;
 	z-index: 2;
 `;
-
 const SideBar = styled.div`
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 17px;
 	padding-right: 0px;
-
-
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 17px;
-    padding-right: 0px;
-
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 17px;
+	padding-right: 0px;
 `;
-
-
 const PostTop = styled.div`
 	width: 100%;
 	height: 50px;
@@ -164,7 +95,6 @@ const PostTop = styled.div`
 	align-items: center;
 	padding: 0 5px;
 `;
-
 const ContentBox = styled.div`
 	width: 500px;
 	display: flex;
@@ -176,7 +106,6 @@ const ContentBox = styled.div`
 		margin-right: 3rem;
 	}
 `;
-
 const ProfilePhoto = styled.img`
 	width: 50px;
 	height: 50px;
@@ -191,12 +120,10 @@ const UserName = styled.p`
 	line-height: 22px;
 	color: #ffffff;
 	margin-top: 20px;
-
 	:hover {
 		cursor: pointer;
 	}
 `;
-
 const DescriptionContainer = styled.div`
 	display: flex;
 	align-items: center;
@@ -212,7 +139,6 @@ const Description = styled.p`
 	color: #b7b7b7;
 	margin-top: 10px;
 `;
-
 const EditIcon = styled(SlPencil)`
 	margin-left: 5px;
 	cursor: pointer;
@@ -228,7 +154,6 @@ const ContainerMetadata = styled.div`
 	cursor: pointer;
 	display: flex;
 `;
-
 const MetadataBox = styled.div`
 	width: 350px;
 	height: 100%;
@@ -237,14 +162,12 @@ const MetadataBox = styled.div`
 	justify-content: center;
 	align-items: center;
 `;
-
 const MetaPhoto = styled.img`
 	width: 150px;
 	height: 100%;
 	border-top-right-radius: 11px;
 	border-bottom-right-radius: 11px;
 `;
-
 const MetaTitle = styled.p`
 	width: 300px;
 	height: 40px;
@@ -256,7 +179,6 @@ const MetaTitle = styled.p`
 	line-height: 19px;
 	color: #cecece;
 `;
-
 const MetaDescrip = styled.p`
 	width: 300px;
 	height: 40px;
@@ -268,7 +190,6 @@ const MetaDescrip = styled.p`
 	line-height: 13px;
 	color: #9b9595;
 `;
-
 const MetaLink = styled.p`
 	width: 300px;
 	height: 40px;

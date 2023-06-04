@@ -1,12 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import hashtagContext from "../context/hashtag.context";
 
 export default function LoginPage() {
 	const [form, setForm] = useState({ email: "", password: "" });
 	const [isSubmit, setIsSubmit] = useState(false);
 	const navigate = useNavigate();
+	const { setUserInfo } = useContext(hashtagContext);
 
 	// useEffect(() => {
 	//   const userToken = localStorage.getItem('userToken');
@@ -33,6 +35,7 @@ export default function LoginPage() {
 			.post(url, form)
 			.then((res) => {
 				localStorage.setItem("userToken", res.data.token);
+				setUserInfo(res.data.usersInfo);
 				navigate("/timeline");
 			})
 			.catch((err) => {

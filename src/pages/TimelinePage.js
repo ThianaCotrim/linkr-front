@@ -2,32 +2,29 @@ import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroller";
 import PostCreation from "../components/PostsComponents/CreatePost";
 import PostsList from "../components/PostsComponents/PostsList";
+import HashtagsBox from "../constants/HashtagsBox";
+import Header from "../constants/Header";
 
 //import MorePostsScroller from "../components/PostsComponents/MorePostsScroller";
 
 export default function TimelinePage() {
 	return (
 		<>
-			<Header>
-				<HeaderBox>linkr</HeaderBox>
-			</Header>
+			<Header />
 			<MainContainer>
 				<TimelineContainer>
 					<MainTitle>timeline</MainTitle>
-
 					<PostCreation />
-
 					<InfiniteScroll>
 						<PostsList />
 					</InfiniteScroll>
 				</TimelineContainer>
+				<HashtagsBox />
 			</MainContainer>
 		</>
 	);
 }
-
 //<MorePostsScroller key={0} /> aplicar dentro de infinitescroll
-
 const MainContainer = styled.div`
 	min-height: 100vh;
 	height: 100%;
@@ -39,16 +36,6 @@ const MainContainer = styled.div`
 		width: 100vw;
 	}
 `;
-
-const Header = styled.div`
-	height: 72px;
-	background-color: #151515;
-	width: 100%;
-	display: flex;
-
-	align-items: center;
-`;
-
 const HeaderBox = styled.div`
 	color: white;
 	font-family: "Passion One", cursive;

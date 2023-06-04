@@ -25,7 +25,7 @@ export default function HashtagsBox() {
 				setHashtagTitle(hashtag);
 				navigate(`/hashtag/${hashtag}`);
 			})
-			.catch((e) => alert(e.data.message));
+			.catch((e) => console.log(e));
 	}
 	return (
 		<HashtagsStyle>
