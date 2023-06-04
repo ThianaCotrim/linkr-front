@@ -5,26 +5,42 @@ import EditPost from "./EditPost";
 import DeletePost from "./DeletePost";
 
 export default function SinglePost({ post }) {
-  const { id, username, description, link, likes, image, metatitle, metadescript, metaimage } =
+  const { id, username, description, link, image, likes, metatitle, metadescript, metaimage } =
     post;
   const [isEditing, setIsEditing] = useState(false);
-  const [deletePostId, setDeletePostId] = useState(null);
+  const [isPostClicked, setIsPostClicked] = useState(false);
+  const [hasClicked, setHasClicked] = useState(true);
+  const [editedDescription, setEditedDescription] = useState(description);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleEditClick = () => {
-    setIsEditing(true);
-  };
-
-  const handleCancelEditing = () => {
     setIsEditing(false);
+    setHasClicked(true);
   };
 
-  const handleDeleteClick = () => {
-    setDeletePostId(id);
+  const handleEditCancel = () => {
+    setIsEditing(false);
+    setHasClicked(false);
+    setEditedDescription(description);
+  };
+
+  const handlePostClick = () => {
+    setIsPostClicked(!isPostClicked);
+    setIsEditing(true);
+    setHasClicked(true);
+  };
+
+  const handleDeleteIconClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleDeleteModalCancel = () => {
+    setIsModalOpen(false);
   };
 
   return (
     <ContainerSinglePost>
-      <Post data-test="post">
+      <Post data-test="post" onClick={handlePostClick}>
         <SideBar>
           <ProfilePhoto src={image} />
         </SideBar>
@@ -32,19 +48,20 @@ export default function SinglePost({ post }) {
         <ContentBox>
           <PostTop>
             <UserName data-test="username">{username}</UserName>
-            <EditIcon size={16} onClick={handleEditClick} />
-            <DeleteIcon size={16} onClick={handleDeleteClick} />
+            {hasClicked && (
+              <IconContainer>
+                <EditIcon size={16} onClick={handleEditClick} />
+                <DeleteIcon size={16} onClick={handleDeleteIconClick} />
+              </IconContainer>
+            )}
           </PostTop>
           {isEditing ? (
-            <EditPost id={id} description={description} onCancel={handleCancelEditing} />
+            <EditPost id={id} description={editedDescription} onCancel={handleEditCancel} />
           ) : (
-            <DescriptionContainer onClick={handleEditClick}>
-              <EditIcon size={16} />
-              <DeleteIcon size={16} onClick={handleDeleteClick} />
+            <DescriptionContainer>
               <Description data-test="description">{description}</Description>
             </DescriptionContainer>
           )}
-          {deletePostId === id && <DeletePost id={id} onCancel={() => setDeletePostId(null)} />}
 
           <ContainerMetadata data-test="link">
             <MetadataBox>
@@ -57,6 +74,9 @@ export default function SinglePost({ post }) {
           </ContainerMetadata>
         </ContentBox>
       </Post>
+      {isModalOpen && (
+        <DeletePost id={id} onCancel={handleDeleteModalCancel} isModalOpen={isModalOpen} />
+      )}
     </ContainerSinglePost>
   );
 }
@@ -149,21 +169,20 @@ const Description = styled.p`
   margin-top: 10px;
 `;
 
+const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const EditIcon = styled(SlPencil)`
-  margin-right: 5px;
+  margin-right: 10px;
   cursor: pointer;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  color: #fff;
 `;
 
 const DeleteIcon = styled(SlTrash)`
   cursor: pointer;
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
+  color: #fff;
 `;
 
 const ContainerMetadata = styled.div`

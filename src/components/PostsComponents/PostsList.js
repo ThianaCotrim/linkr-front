@@ -7,50 +7,51 @@ import SinglePost from "./SinglePost.js";
 //import singlePost from "./SinglePost";//
 
 export default function PostsList() {
-	const token = localStorage.getItem("userToken")
-	const [posts, setPosts] = useState(null)
-	console.log(token)
-	useEffect(() => {
-		const url = `http://localhost:5000/posts`
-		const headers = {headers: {authorization: `Bearer ${token}`}}
-		axios
-			.get(url, headers)
-				.then((res) => setPosts(res.data))
-					.catch((err) => alert("An error occured while trying to fetch the posts, please refresh the page"))
-		
-	}, [])
-	console.log()
-	return (
-		<PostListContainer>
-			{posts 
-			? posts.length === 0 
-			? <MessageEmpty>There are no posts yet</MessageEmpty>
-			: posts.map((post) => {
-				return(
-					<SinglePost post={post}/>
-				)
-			}) : 
-			<>
-			<ThreeDots
-				height="80"
-				width="80"
-				radius="9"
-				color="white"
-				ariaLabel="three-dots-loading"
-				wrapperStyle={{}}
-				wrapperClassName=""
-				visible={true}
-			/>
-			<MessageEmpty data-test="message">
-				No posts found from your friends
-			</MessageEmpty>{" "}
-			:
-			<MessageEmpty data-test="message">
-				You don't follow anyone yet. Search for new friends!
-			</MessageEmpty></>}
-			
-		</PostListContainer>
-	);
+  const token = localStorage.getItem("userToken");
+  const [posts, setPosts] = useState(null);
+  console.log(token);
+  useEffect(() => {
+    const url = `http://localhost:5000/posts`;
+    const headers = { headers: { authorization: `Bearer ${token}` } };
+    axios
+      .get(url, headers)
+      .then((res) => setPosts(res.data))
+      .catch((err) =>
+        //alert("An error occured while trying to fetch the posts, please refresh the page")
+				console.log(err)
+      );
+  }, []);
+  console.log();
+  return (
+    <PostListContainer>
+      {posts ? (
+        posts.length === 0 ? (
+          <MessageEmpty>There are no posts yet</MessageEmpty>
+        ) : (
+          posts.map((post) => {
+            return <SinglePost post={post} />;
+          })
+        )
+      ) : (
+        <>
+          <ThreeDots
+            height="80"
+            width="80"
+            radius="9"
+            color="white"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClassName=""
+            visible={true}
+          />
+          <MessageEmpty data-test="message">No posts found from your friends</MessageEmpty> :
+          <MessageEmpty data-test="message">
+            You don't follow anyone yet. Search for new friends!
+          </MessageEmpty>
+        </>
+      )}
+    </PostListContainer>
+  );
 }
 
 // adicionar os singlepost ali encima

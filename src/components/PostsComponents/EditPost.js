@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import React, { useState, useRef } from "react";
 import axios from "axios";
 
@@ -37,7 +38,7 @@ function EditPost({ id, description }) {
 
   return (
     <>
-      <textarea
+      <TextArea
         ref={inputRef}
         value={text}
         onChange={handleInputChange}
@@ -49,5 +50,20 @@ function EditPost({ id, description }) {
     </>
   );
 }
+
+const TextArea = styled.textarea`
+  font-size: 18px;
+  color: #b7b7b7;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  max-height: 200px;
+  max-width: 490px;
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
+`;
 
 export default EditPost;

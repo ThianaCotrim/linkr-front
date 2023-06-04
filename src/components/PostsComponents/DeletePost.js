@@ -2,62 +2,51 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Modal from "react-modal";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { RiLoader4Line } from "react-icons/ri";
 
-function DeletePost({ id }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+function DeletePost({ id, onCancel, isModalOpen }) {
   const [isDeleting, setIsDeleting] = useState(false);
-  const navigate = useNavigate();
-
-  function handleDeleteClick() {
-    setIsModalOpen(true);
-  }
 
   async function handleConfirmDelete() {
     try {
       setIsDeleting(true);
       await axios.delete(`http://localhost:5000/posts/${id}`);
       setIsDeleting(false);
-      setIsModalOpen(false);
-      navigate("/posts");
+      onCancel();
     } catch (error) {
       console.error(error);
       setIsDeleting(false);
-      setIsModalOpen(false);
+      onCancel();
       alert("Unable to delete the post. Please try again.");
     }
   }
 
   function handleCancelDelete() {
-    setIsModalOpen(false);
+    onCancel();
   }
 
   return (
-    <>
-      <DeleteButton onClick={handleDeleteClick}>
-        {isDeleting ? <RiLoader4Line className="loading" /> : "Delete"}
-      </DeleteButton>
-
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={handleCancelDelete}
-        style={customModalStyles}
-        ariaHideApp={false}
-      >
-        <ModalTitle>Are you sure you want to delete this post?</ModalTitle>
-        <ButtonContainer>
-          <CancelButton onClick={handleCancelDelete}>No, go back</CancelButton>
-          <DeleteButton onClick={handleConfirmDelete} disabled={isDeleting}>
-            {isDeleting ? <RiLoader4Line className="loading" /> : "Yes, delete it"}
-          </DeleteButton>
-        </ButtonContainer>
-      </Modal>
-    </>
+    <Modal
+      isOpen={isModalOpen}
+      onRequestClose={handleCancelDelete}
+      style={customModalStyles}
+      ariaHideApp={false}
+    >
+      <ModalTitle>Are you sure you want to delete this post?</ModalTitle>
+      <ButtonContainer>
+        <CancelButton onClick={handleCancelDelete}>No, go back</CancelButton>
+        <DeleteButton onClick={handleConfirmDelete} disabled={isDeleting}>
+          {isDeleting ? <div className="loading" /> : "Yes, delete it"}
+        </DeleteButton>
+      </ButtonContainer>
+    </Modal>
   );
 }
 
 const customModalStyles = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    zIndex: 9999,
+  },
   content: {
     width: "597px",
     height: "262px",
@@ -68,6 +57,12 @@ const customModalStyles = {
     alignItems: "center",
     justifyContent: "center",
     padding: "0",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    zIndex: 10000,
+    border: "none",
   },
 };
 
