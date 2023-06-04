@@ -173,6 +173,7 @@ const MetaPhoto = styled.img`
   height: 100%;
   border-top-right-radius: 11px;
   border-bottom-right-radius: 11px;
+  object-fit: cover;
 `;
 
 const MetaTitle = styled.p`
