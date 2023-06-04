@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import reactStringReplace from "react-string-replace";
 import styled from "styled-components";
-import { SlPencil } from "react-icons/sl";
+import { SlPencil, SlTrash } from "react-icons/sl";
 import EditPost from "./EditPost";
+import DeletePost from "./DeletePost";
 
 export default function SinglePost({ post }) {
 	const {
@@ -10,70 +11,90 @@ export default function SinglePost({ post }) {
 		username,
 		description,
 		link,
-		likes,
 		image,
+		likes,
 		metatitle,
 		metadescript,
 		metaimage,
 	} = post;
 	const [isEditing, setIsEditing] = useState(false);
+	const [isPostClicked, setIsPostClicked] = useState(false);
+	const [hasClicked, setHasClicked] = useState(true);
+	const [editedDescription, setEditedDescription] = useState(description);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
 	const handleEditClick = () => {
-		setIsEditing(true);
-	};
-	const handleCancelEditing = () => {
 		setIsEditing(false);
+		setHasClicked(true);
 	};
+
+	const handleEditCancel = () => {
+		setIsEditing(false);
+		setHasClicked(false);
+		setEditedDescription(description);
+	};
+
+	const handlePostClick = () => {
+		setIsPostClicked(!isPostClicked);
+		setIsEditing(true);
+		setHasClicked(true);
+	};
+
+	const handleDeleteIconClick = () => {
+		setIsModalOpen(true);
+	};
+
+	const handleDeleteModalCancel = () => {
+		setIsModalOpen(false);
+	};
+
 	return (
 		<ContainerSinglePost>
-			<Post data-test="post">
+			<Post data-test="post" onClick={handlePostClick}>
 				<SideBar>
 					<ProfilePhoto src={image} />
 				</SideBar>
+
 				<ContentBox>
 					<PostTop>
 						<UserName data-test="username">{username}</UserName>
+						{hasClicked && (
+							<IconContainer>
+								<EditIcon size={16} onClick={handleEditClick} />
+								<DeleteIcon size={16} onClick={handleDeleteIconClick} />
+							</IconContainer>
+						)}
 					</PostTop>
 					{isEditing ? (
 						<EditPost
 							id={id}
-							description={description}
-							onCancel={handleCancelEditing}
+							description={editedDescription}
+							onCancel={handleEditCancel}
 						/>
 					) : (
-						<DescriptionContainer onClick={handleEditClick}>
-							<Description data-test="description">
-								{reactStringReplace(
-									description,
-									description.match(/#(\w+)/g),
-									(match) => (
-										<span
-											style={{
-												fontFamily: "Lato",
-												fontWeight: "700",
-												fontSize: "19px",
-												lineHeight: "23px",
-												letterSpacing: "0.05em",
-												color: "#FFFFFF",
-											}}
-										>
-											{match}
-										</span>
-									)
-								)}
-							</Description>
-							<EditIcon size={16} />
+						<DescriptionContainer>
+							<Description data-test="description">{description}</Description>
 						</DescriptionContainer>
 					)}
+
 					<ContainerMetadata data-test="link">
 						<MetadataBox>
 							<MetaTitle>{metatitle}</MetaTitle>
 							<MetaDescrip>{metadescript}</MetaDescrip>
 							<MetaLink>{link}</MetaLink>
 						</MetadataBox>
+
 						<MetaPhoto src={metaimage} />
 					</ContainerMetadata>
 				</ContentBox>
 			</Post>
+			{isModalOpen && (
+				<DeletePost
+					id={id}
+					onCancel={handleDeleteModalCancel}
+					isModalOpen={isModalOpen}
+				/>
+			)}
 		</ContainerSinglePost>
 	);
 }
@@ -148,7 +169,9 @@ const DescriptionContainer = styled.div`
 	display: flex;
 	align-items: center;
 	cursor: pointer;
+	position: relative;
 `;
+
 const Description = styled.p`
 	width: 100%;
 	min-height: 45px;
@@ -159,10 +182,22 @@ const Description = styled.p`
 	color: #b7b7b7;
 	margin-top: 10px;
 `;
-const EditIcon = styled(SlPencil)`
-	margin-left: 5px;
-	cursor: pointer;
+
+const IconContainer = styled.div`
+	display: flex;
+	align-items: center;
 `;
+const EditIcon = styled(SlPencil)`
+	margin-right: 10px;
+	cursor: pointer;
+	color: #fff;
+`;
+
+const DeleteIcon = styled(SlTrash)`
+	cursor: pointer;
+	color: #fff;
+`;
+
 const ContainerMetadata = styled.div`
 	width: 100%;
 	height: 155px;

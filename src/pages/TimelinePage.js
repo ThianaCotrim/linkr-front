@@ -4,6 +4,7 @@ import PostCreation from "../components/PostsComponents/CreatePost";
 import PostsList from "../components/PostsComponents/PostsList";
 import HashtagsBox from "../constants/HashtagsBox";
 import Header from "../constants/Header";
+import SearchUsers from "../components/SearchUsers";
 
 //import MorePostsScroller from "../components/PostsComponents/MorePostsScroller";
 
@@ -25,6 +26,7 @@ export default function TimelinePage() {
 	);
 }
 //<MorePostsScroller key={0} /> aplicar dentro de infinitescroll
+
 const MainContainer = styled.div`
 	min-height: 100vh;
 	height: 100%;
@@ -35,6 +37,16 @@ const MainContainer = styled.div`
 	@media (max-width: 710px) {
 		width: 100vw;
 	}
+`;
+const SearchArea = styled.div`
+	display: flex;
+	align-items: center;
+	flex: 1;
+	justify-content: center;
+`;
+
+const InputContainer = styled.div`
+	position: relative;
 `;
 const TimelineContainer = styled.div`
 	display: flex;
