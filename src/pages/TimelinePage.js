@@ -2,34 +2,30 @@ import styled from "styled-components";
 import InfiniteScroll from "react-infinite-scroller";
 import PostCreation from "../components/PostsComponents/CreatePost";
 import PostsList from "../components/PostsComponents/PostsList";
+import HashtagsBox from "../constants/HashtagsBox";
+import Header from "../constants/Header";
 import SearchUsers from "../components/SearchUsers";
 
 //import MorePostsScroller from "../components/PostsComponents/MorePostsScroller";
 
 export default function TimelinePage() {
-
-  return (
-    <>
-      <Header>
-        <HeaderBox>linkr</HeaderBox>
-        <SearchArea>
-          <InputContainer>
-            <SearchUsers />
-          </InputContainer>
-        </SearchArea>
-      </Header>
-      <MainContainer>
-        <TimelineContainer>
-          <MainTitle>timeline</MainTitle>
-          <PostCreation />
-          <InfiniteScroll>
-            <PostsList />
-          </InfiniteScroll>
-        </TimelineContainer>
-      </MainContainer>
-    </>
-  );
+	return (
+		<>
+			<Header />
+			<MainContainer>
+				<TimelineContainer>
+					<MainTitle>timeline</MainTitle>
+					<PostCreation />
+					<InfiniteScroll>
+						<PostsList />
+					</InfiniteScroll>
+				</TimelineContainer>
+				<HashtagsBox />
+			</MainContainer>
+		</>
+	);
 }
+//<MorePostsScroller key={0} /> aplicar dentro de infinitescroll
 
 const MainContainer = styled.div`
   min-height: 100vh;
@@ -42,15 +38,6 @@ const MainContainer = styled.div`
     width: 100vw;
   }
 `;
-
-const Header = styled.div`
-  height: 72px;
-  background-color: #151515;
-  width: 100%;
-  display: flex;
-  align-items: center;
-`;
-
 const SearchArea = styled.div`
   display: flex;
   align-items: center;
@@ -61,21 +48,12 @@ const SearchArea = styled.div`
 const InputContainer = styled.div`
   position: relative;
 `;
-
-const HeaderBox = styled.div`
-  color: white;
-  font-family: "Passion One", cursive;
-  font-size: 49px;
-  line-height: 54px;
-`;
-
 const TimelineContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 `;
-
 const MainTitle = styled.p`
   font-family: "Oswald";
   font-weight: 700;

@@ -80,7 +80,6 @@ export default function SinglePost({ post }) {
     </ContainerSinglePost>
   );
 }
-
 const ContainerSinglePost = styled.div`
   width: 100%;
   height: fit-content;
@@ -88,7 +87,6 @@ const ContainerSinglePost = styled.div`
   border-radius: 16px;
   margin-bottom: 15px;
 `;
-
 const Post = styled.div`
   width: 100%;
   height: fit-content;
@@ -100,15 +98,18 @@ const Post = styled.div`
   position: relative;
   z-index: 2;
 `;
-
 const SideBar = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 17px;
-  padding-right: 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 17px;
+	padding-right: 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 17px;
+	padding-right: 0px;
 `;
-
 const PostTop = styled.div`
   width: 100%;
   height: 50px;
@@ -117,7 +118,6 @@ const PostTop = styled.div`
   align-items: center;
   padding: 0 5px;
 `;
-
 const ContentBox = styled.div`
   width: 500px;
   display: flex;
@@ -129,28 +129,24 @@ const ContentBox = styled.div`
     margin-right: 3rem;
   }
 `;
-
 const ProfilePhoto = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 26.5px;
   margin-bottom: 20px;
 `;
-
 const UserName = styled.p`
-  height: 23px;
-  font-family: "Lato";
-  font-weight: 400;
-  font-size: 19px;
-  line-height: 22px;
-  color: #ffffff;
-  margin-top: 20px;
-
-  :hover {
-    cursor: pointer;
-  }
+	height: 23px;
+	font-family: "Lato";
+	font-weight: 400;
+	font-size: 19px;
+	line-height: 22px;
+	color: #ffffff;
+	margin-top: 20px;
+	:hover {
+		cursor: pointer;
+	}
 `;
-
 const DescriptionContainer = styled.div`
   display: flex;
   align-items: center;
@@ -173,7 +169,6 @@ const IconContainer = styled.div`
   display: flex;
   align-items: center;
 `;
-
 const EditIcon = styled(SlPencil)`
   margin-right: 10px;
   cursor: pointer;
@@ -196,7 +191,6 @@ const ContainerMetadata = styled.div`
   cursor: pointer;
   display: flex;
 `;
-
 const MetadataBox = styled.div`
   width: 350px;
   height: 100%;
@@ -205,14 +199,12 @@ const MetadataBox = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
 const MetaPhoto = styled.img`
   width: 150px;
   height: 100%;
   border-top-right-radius: 11px;
   border-bottom-right-radius: 11px;
 `;
-
 const MetaTitle = styled.p`
   width: 300px;
   height: 40px;
@@ -224,7 +216,6 @@ const MetaTitle = styled.p`
   line-height: 19px;
   color: #cecece;
 `;
-
 const MetaDescrip = styled.p`
   width: 300px;
   height: 40px;
@@ -236,7 +227,6 @@ const MetaDescrip = styled.p`
   line-height: 13px;
   color: #9b9595;
 `;
-
 const MetaLink = styled.p`
   width: 300px;
   height: 40px;

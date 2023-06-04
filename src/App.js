@@ -9,11 +9,14 @@ import { useState } from "react";
 function App() {
 	const [hashtagsInfo, setHashtagsInfo] = useState([]);
 	const [hashtagTitle, setHashtagTitle] = useState("");
+	const [userInfo, setUserInfo] = useState([]);
 	const info = {
 		hashtagsInfo,
 		setHashtagsInfo,
 		hashtagTitle,
 		setHashtagTitle,
+		userInfo,
+		setUserInfo,
 	};
 	return (
 		<hashtagContext.Provider value={info}>
