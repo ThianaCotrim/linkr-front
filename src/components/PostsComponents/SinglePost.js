@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { SlPencil } from "react-icons/sl";
+import { SlPencil, SlTrash } from "react-icons/sl";
 import EditPost from "./EditPost";
+import DeletePost from "./DeletePost";
 
 export default function SinglePost({ post }) {
   const { id, username, description, link, likes, image, metatitle, metadescript, metaimage } =
     post;
   const [isEditing, setIsEditing] = useState(false);
+  const [deletePostId, setDeletePostId] = useState(null);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -14,6 +16,10 @@ export default function SinglePost({ post }) {
 
   const handleCancelEditing = () => {
     setIsEditing(false);
+  };
+
+  const handleDeleteClick = () => {
+    setDeletePostId(id);
   };
 
   return (
@@ -26,16 +32,19 @@ export default function SinglePost({ post }) {
         <ContentBox>
           <PostTop>
             <UserName data-test="username">{username}</UserName>
+            <EditIcon size={16} onClick={handleEditClick} />
+            <DeleteIcon size={16} onClick={handleDeleteClick} />
           </PostTop>
-
           {isEditing ? (
             <EditPost id={id} description={description} onCancel={handleCancelEditing} />
           ) : (
             <DescriptionContainer onClick={handleEditClick}>
-              <Description data-test="description">{description}</Description>
               <EditIcon size={16} />
+              <DeleteIcon size={16} onClick={handleDeleteClick} />
+              <Description data-test="description">{description}</Description>
             </DescriptionContainer>
           )}
+          {deletePostId === id && <DeletePost id={id} onCancel={() => setDeletePostId(null)} />}
 
           <ContainerMetadata data-test="link">
             <MetadataBox>
@@ -126,6 +135,7 @@ const DescriptionContainer = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+  position: relative;
 `;
 
 const Description = styled.p`
@@ -140,8 +150,20 @@ const Description = styled.p`
 `;
 
 const EditIcon = styled(SlPencil)`
-  margin-left: 5px;
+  margin-right: 5px;
   cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+`;
+
+const DeleteIcon = styled(SlTrash)`
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 `;
 
 const ContainerMetadata = styled.div`
