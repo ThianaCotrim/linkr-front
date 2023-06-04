@@ -1,4 +1,7 @@
-import styled from "styled-components";
+import axios from 'axios'
+import { useState } from 'react'
+import styled from 'styled-components'
+
 
 export default function PostCreation() {
 	return (
@@ -21,6 +24,74 @@ export default function PostCreation() {
 			</Form>
 		</CreatePostContainer>
 	);
+
+
+export default  function PostCreation (){
+    const [form, setForm] = useState({link: "", description: ""})
+    const [isPublishing, setIsPublishing] = useState(false)
+    console.log(form)
+    
+
+    function handleForm(e) {
+		setForm({ ...form, [e.target.name]: e.target.value });
+	}
+    function submitForm(e) {
+        e.preventDefault()
+        setIsPublishing(true)
+        const token = localStorage.getItem("userToken")
+        const url = `http://localhost:5000/posts`
+        const headers = {headers: {authorization: `Bearer ${token}`}}
+        axios
+            .post(url, form, headers)
+            .then((res) => {
+                setIsPublishing(false)
+                setForm({link: "", description: ""})
+                document.location.reload(true)
+            })
+            .catch((err) => {
+                setIsPublishing(false)
+                alert(err.response.message)
+            })
+    }
+    return (
+
+        <CreatePostContainer data-test="publish-box">
+
+            <ContainerProfilePhoto>
+                <ProfilePhoto />
+            </ContainerProfilePhoto>
+
+            <Form onSubmit={submitForm}>
+                
+                <Title>What are you going to share today?</Title>
+                <InputLink 
+                    data-test="link" 
+                    placeholder="http://..."
+                    name="link"
+                    value={form.link} 
+                    onChange={handleForm}
+                    required/>
+                <InputDescription 
+                    data-test="description" 
+                    name="description"
+                    placeholder="Awesome article about #javascript" 
+                    value={form.description}
+                    onChange={handleForm}/>
+
+                <ButtonBox>
+                    <Button 
+                        disabled={isPublishing} 
+                        type='submit' 
+                        data-test="publish-btn"
+                        >{isPublishing ? "Publishing..." : "Publish"}</Button>
+                </ButtonBox>
+
+            </Form>
+
+        </CreatePostContainer>
+
+    )
+
 }
 
 const CreatePostContainer = styled.div`

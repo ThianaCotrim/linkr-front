@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React  from "react";
 import styled from "styled-components";
-import { SlPencil } from "react-icons/sl";
-import EditPost from "./EditPost";
+import {SlPencil} from "react-icons/sl"
 
 export default function SinglePost({ post }) {
+
 	const {
 		id,
 		username,
@@ -63,6 +63,58 @@ export default function SinglePost({ post }) {
 			</Post>
 		</ContainerSinglePost>
 	);
+
+  const { username, description, link, likes, image, metatitle, metadescript, metaimage } = post
+  function handleClick() {
+    window.open(link, '_blank')
+  }
+  return (
+
+    <ContainerSinglePost>
+
+      <Post data-test="post">
+
+        <SideBar>
+
+          <ProfilePhoto src={image} />
+
+        </SideBar>
+
+        <ContentBox>
+
+          <PostTop>
+
+            <UserName data-test="username" >{username}</UserName>
+
+          </PostTop>
+
+          <Description data-test="description">{description}</Description>
+
+          <ContainerMetadata data-test="link" onClick={handleClick}>
+            <MetadataBox>
+
+              <MetaTitle>{metatitle}</MetaTitle>
+              <MetaDescrip>{metadescript}</MetaDescrip>
+              <MetaLink>{link}</MetaLink>
+
+            </MetadataBox>
+
+            <MetaPhoto src={metaimage} />
+          
+
+
+
+          </ContainerMetadata>
+
+        </ContentBox>
+
+      </Post>
+
+    </ContainerSinglePost>
+
+  );
+
+
 }
 
 const ContainerSinglePost = styled.div`
@@ -86,12 +138,23 @@ const Post = styled.div`
 `;
 
 const SideBar = styled.div`
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	padding: 17px;
 	padding-right: 0px;
+
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 17px;
+    padding-right: 0px;
+
 `;
+
 
 const PostTop = styled.div`
 	width: 100%;
@@ -120,7 +183,6 @@ const ProfilePhoto = styled.img`
 	border-radius: 26.5px;
 	margin-bottom: 20px;
 `;
-
 const UserName = styled.p`
 	height: 23px;
 	font-family: "Lato";
@@ -140,7 +202,6 @@ const DescriptionContainer = styled.div`
 	align-items: center;
 	cursor: pointer;
 `;
-
 const Description = styled.p`
 	width: 100%;
 	min-height: 45px;
@@ -156,7 +217,6 @@ const EditIcon = styled(SlPencil)`
 	margin-left: 5px;
 	cursor: pointer;
 `;
-
 const ContainerMetadata = styled.div`
 	width: 100%;
 	height: 155px;
