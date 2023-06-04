@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import reactStringReplace from "react-string-replace";
 import styled from "styled-components";
 import { SlPencil } from "react-icons/sl";
 import EditPost from "./EditPost";
@@ -40,7 +41,26 @@ export default function SinglePost({ post }) {
 						/>
 					) : (
 						<DescriptionContainer onClick={handleEditClick}>
-							<Description data-test="description">{description}</Description>
+							<Description data-test="description">
+								{reactStringReplace(
+									description,
+									description.match(/#(\w+)/g),
+									(match) => (
+										<span
+											style={{
+												fontFamily: "Lato",
+												fontWeight: "700",
+												fontSize: "19px",
+												lineHeight: "23px",
+												letterSpacing: "0.05em",
+												color: "#FFFFFF",
+											}}
+										>
+											{match}
+										</span>
+									)
+								)}
+							</Description>
 							<EditIcon size={16} />
 						</DescriptionContainer>
 					)}

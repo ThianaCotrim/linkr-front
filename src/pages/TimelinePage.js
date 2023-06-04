@@ -36,20 +36,12 @@ const MainContainer = styled.div`
 		width: 100vw;
 	}
 `;
-const HeaderBox = styled.div`
-	color: white;
-	font-family: "Passion One", cursive;
-	font-size: 49px;
-	line-height: 54px;
-`;
-
 const TimelineContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 `;
-
 const MainTitle = styled.p`
 	font-family: "Oswald";
 	font-weight: 700;
