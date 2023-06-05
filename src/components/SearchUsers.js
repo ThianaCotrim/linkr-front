@@ -4,8 +4,7 @@ import styled from "styled-components";
 import { DebounceInput } from "react-debounce-input";
 import { RxMagnifyingGlass } from "react-icons/rx";
 
-export default function SearchUsers() {
-  const [searchQuery, setSearchQuery] = useState("");
+export default function SearchUsers({ searchQuery, setSearchQuery }) {
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState("");
@@ -50,16 +49,18 @@ export default function SearchUsers() {
 
   return (
     <>
-      <InputContainer>
-        <Input
-          type="text"
-          placeholder="Search for people"
-          value={searchQuery}
-          debounceTimeout={300}
-          onChange={handleInputChange}
-        />
-        <StyledMagnifyingGlass size={30} color="#c6c6c6" />
-      </InputContainer>
+      <SearchArea>
+        <InputContainer>
+          <Input
+            type="text"
+            placeholder="Search for people"
+            value={searchQuery}
+            debounceTimeout={300}
+            onChange={handleInputChange}
+          />
+          <StyledMagnifyingGlass size={30} color="#c6c6c6" />
+        </InputContainer>
+      </SearchArea>
 
       {isLoading ? (
         <p>Loading...</p>
@@ -76,10 +77,6 @@ export default function SearchUsers() {
     </>
   );
 }
-
-const InputContainer = styled.div`
-  position: relative;
-`;
 
 const Input = styled(DebounceInput)`
   color: #515151;
@@ -141,4 +138,12 @@ const UserImage = styled.img`
 const UserName = styled.span`
   font-size: 16px;
   color: #333;
+`;
+
+const SearchArea = styled.div`
+  display: flex;
+`;
+
+const InputContainer = styled.div`
+  position: relative;
 `;
