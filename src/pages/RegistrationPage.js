@@ -51,6 +51,7 @@ export default function RegistrationPage() {
 								placeholder="e-mail"
 								type="email"
 								autoComplete="email"
+								data-test="email"
 								name="email"
 								value={form.email}
 								onChange={handleForm}
@@ -59,6 +60,7 @@ export default function RegistrationPage() {
 								placeholder="password"
 								type="password"
 								name="password"
+								data-test="password"
 								value={form.password}
 								onChange={handleForm}
 							/>
@@ -66,6 +68,7 @@ export default function RegistrationPage() {
 								placeholder="username"
 								type="text"
 								name="name"
+								data-test="username"
 								value={form.name}
 								onChange={handleForm}
 							/>
@@ -73,21 +76,22 @@ export default function RegistrationPage() {
 								placeholder="picture url"
 								type="url"
 								name="profileImage"
+								data-test="picture-url"
 								value={form.profileImage}
 								onChange={handleForm}
 							/>
-							<button type="submit" disabled={isSubmit}>
+							<button data-test="sing-up-btn" type="submit" disabled={isSubmit}>
 								{" "}
 								{isSubmit ? "Enviando..." : "Sing Up"}
 							</button>
 						</form>
-						<Link to="/">
+						<Link  data-test="login-link"  to="/">
 							<h3>Switch back to log in</h3>
 						</Link>
 					</Box>
 				</DirectBox>
 			</Container>
-			<Link to="/">
+			<Link  data-test="login-link"  to="/">
 				<h3>Switch back to log in</h3>
 			</Link>
 		</>

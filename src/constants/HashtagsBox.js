@@ -28,8 +28,8 @@ export default function HashtagsBox() {
 			.catch((e) => console.log(e));
 	}
 	return (
-		<HashtagsStyle>
-			<div>
+		<HashtagsStyle >
+			<div data-test="trending">
 				<h1>trending</h1>
 			</div>
 			<ul>
@@ -37,7 +37,7 @@ export default function HashtagsBox() {
 					<p>Sem trendings</p>
 				) : (
 					topHashtags.map((h, index) => (
-						<li key={index} onClick={() => specificPage(h.hashtag)}>
+						<li data-test="hashtag" key={index} onClick={() => specificPage(h.hashtag)}>
 							{" "}
 							{h.hashtag}
 						</li>
