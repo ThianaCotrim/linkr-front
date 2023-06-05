@@ -57,6 +57,7 @@ export default function SearchUsers({ searchQuery, setSearchQuery }) {
             value={searchQuery}
             debounceTimeout={300}
             onChange={handleInputChange}
+            data-test="search"
           />
           <StyledMagnifyingGlass size={30} color="#c6c6c6" />
         </InputContainer>
@@ -67,7 +68,7 @@ export default function SearchUsers({ searchQuery, setSearchQuery }) {
       ) : (
         <UserList>
           {searchResults.map((user) => (
-            <UserItem key={user.id}>
+            <UserItem key={user.id} data-test="user-search">
               <UserImage src={user.profileImage} alt="" width={39} height={39} />
               <UserName>{user.name}</UserName>
             </UserItem>

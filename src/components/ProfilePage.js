@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import PostsList from "./PostsList";
+import PostsList from "./PostsComponents/PostsList";
 import { useLocation } from "react-router-dom";
-import Header from "./Header";
 
 export default function ProfilePage() {
   const location = useLocation();
@@ -10,14 +9,13 @@ export default function ProfilePage() {
 
   return (
     <>
-      <Header />
       <MainContainer>
         <Container>
           <ProfilePhoto src={image} alt={username} />
           <MainTitle>{username}'s posts</MainTitle>
         </Container>
         <PostsListContainer>
-          <PostsList userId={id} />
+          <PostsList userId={id} data-test="post" />
         </PostsListContainer>
       </MainContainer>
     </>

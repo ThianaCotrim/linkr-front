@@ -73,8 +73,8 @@ export default function SinglePost({ post }) {
 						<UserName data-test="username">{username}</UserName>
 						{hasClicked && (
 							<IconContainer>
-								<EditIcon size={16} onClick={handleEditClick} />
-								<DeleteIcon size={16} onClick={handleDeleteIconClick} />
+								<EditIcon size={16} onClick={handleEditClick} data-test="edit-btn"/>
+								<DeleteIcon size={16} onClick={handleDeleteIconClick} data-test="delete-btn"/>
 							</IconContainer>
 						)}
 					</PostTop>
@@ -83,6 +83,7 @@ export default function SinglePost({ post }) {
 							id={id}
 							description={editedDescription}
 							onCancel={handleEditCancel}
+              data-test="edit-input"
 						/>
 					) : (
 						<DescriptionContainer>
