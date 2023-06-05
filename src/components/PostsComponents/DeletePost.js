@@ -33,8 +33,8 @@ function DeletePost({ id, onCancel, isModalOpen }) {
     >
       <ModalTitle>Are you sure you want to delete this post?</ModalTitle>
       <ButtonContainer>
-        <CancelButton onClick={handleCancelDelete}>No, go back</CancelButton>
-        <DeleteButton onClick={handleConfirmDelete} disabled={isDeleting}>
+        <CancelButton onClick={handleCancelDelete} data-test="cancel">No, go back</CancelButton >
+        <DeleteButton onClick={handleConfirmDelete} disabled={isDeleting} data-test="confirm">
           {isDeleting ? <div className="loading" /> : "Yes, delete it"}
         </DeleteButton>
       </ButtonContainer>
