@@ -1,75 +1,43 @@
 import styled from "styled-components";
 import { AiOutlineHeart } from "react-icons/ai";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import logo from "../assets/logo.png";
-import { useNavigate } from "react-router-dom";
 import HashtagsBox from "../constants/HashtagsBox";
-import { useState } from "react";
+import { useContext } from "react";
+import hashtagContext from "../context/hashtag.context";
+import Header from "../constants/Header";
 
 export default function SpecificHashtagTimeline() {
-	const [logout, setLogout] = useState(false);
-	const navigate = useNavigate();
-	function exit() {
-		navigate("/");
-	}
+	const { hashtagTitle, hashtagsInfo } = useContext(hashtagContext);
 	return (
 		<>
-			<Header>
-				<p>linkr</p>
-				{logout ? (
-					<IoIosArrowUp
-						onClick={() => setLogout(false)}
-						style={{
-							color: "white",
-							marginLeft: "87%",
-							width: "10%",
-							height: "50%",
-							cursor: "pointer",
-						}}
-					/>
-				) : (
-					<IoIosArrowDown
-						onClick={() => setLogout(true)}
-						style={{
-							color: "white",
-							marginLeft: "87%",
-							width: "10%",
-							height: "50%",
-							cursor: "pointer",
-						}}
-					/>
-				)}
-				<img src={logo} alt="profileImage" />
-			</Header>
+			<Header />
 			<Container>
 				<div>
-					<h1># texto</h1>
-					<PostDiv>
-						<ProfileInfo>
-							<img src={logo} alt="profileImage" />
-							<AiOutlineHeart
-								style={{
-									color: "white",
-									width: "70%",
-									height: "10%",
-									marginTop: "15%",
-								}}
-							/>
-						</ProfileInfo>
-						<Description>
-							<p>Nome</p>
-							<p>Descrição do post #PeideiEsai</p>
-							<p style={{ color: "white", marginLeft: "2%", marginTop: "2%" }}>
-								Aqui vai ir uma imagem ou link de matéria caso tenha
-							</p>
-						</Description>
-					</PostDiv>
+					<h1># {hashtagTitle}</h1>
+					{hashtagsInfo.map((p, index) => (
+						<PostDiv key={index}>
+							<ProfileInfo>
+								<img src={p.profileImage} alt="profileImage" />
+								<AiOutlineHeart
+									style={{
+										color: "white",
+										width: "70%",
+										height: "10%",
+										marginTop: "15%",
+									}}
+								/>
+							</ProfileInfo>
+							<Description>
+								<p>{p.name}</p>
+								<p>{p.description}</p>
+								<p
+									style={{ color: "white", marginLeft: "2%", marginTop: "2%" }}
+								>
+									{p.link}
+								</p>
+							</Description>
+						</PostDiv>
+					))}
 				</div>
-				{logout === true && (
-					<LogoutDiv>
-						<p onClick={exit}>Logout</p>
-					</LogoutDiv>
-				)}
 				<HashtagsBox />
 			</Container>
 		</>
@@ -82,6 +50,7 @@ const Container = styled.div`
 	justify-content: space-evenly;
 	background-color: #333333;
 	box-sizing: border-box;
+	overflow: hidden;
 	h1 {
 		font-family: "Oswald";
 		font-style: normal;
@@ -137,49 +106,5 @@ const Description = styled.div`
 		color: #b7b7b7;
 		margin-left: 2%;
 		margin-top: 2%;
-	}
-`;
-const Header = styled.div`
-	height: 72px;
-	background-color: #151515;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	position: relative;
-	box-sizing: border-box;
-	img {
-		width: 2.6%;
-		height: 70%;
-		border-radius: 100%;
-		margin-right: 1%;
-	}
-	p {
-		color: white;
-		font-family: "Passion One", cursive;
-		font-size: 49px;
-		line-height: 54px;
-		margin-left: 1%;
-	}
-`;
-const LogoutDiv = styled.div`
-	background: #171717;
-	border-radius: 0px 0px 20px 20px;
-	width: 7%;
-	height: 4%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
-	right: 0%;
-	p {
-		font-family: "Lato";
-		font-style: normal;
-		font-weight: 700;
-		font-size: 17px;
-		line-height: 20px;
-		letter-spacing: 0.05em;
-		color: #ffffff;
-		cursor: pointer;
 	}
 `;

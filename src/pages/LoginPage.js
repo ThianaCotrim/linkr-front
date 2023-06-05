@@ -1,12 +1,14 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import hashtagContext from "../context/hashtag.context";
 
 export default function LoginPage() {
 	const [form, setForm] = useState({ email: "", password: "" });
 	const [isSubmit, setIsSubmit] = useState(false);
 	const navigate = useNavigate();
+	const { setUserInfo } = useContext(hashtagContext);
 
 	// useEffect(() => {
 	//   const userToken = localStorage.getItem('userToken');
@@ -33,6 +35,7 @@ export default function LoginPage() {
 			.post(url, form)
 			.then((res) => {
 				localStorage.setItem("userToken", res.data.token);
+				setUserInfo(res.data.usersInfo);
 				navigate("/timeline");
 			})
 			.catch((err) => {
@@ -94,8 +97,12 @@ const Container = styled.div`
 	display: flex;
 	width: 100%;
 	justify-content: center;
+	@media (max-width: 375px) {
+		flex-direction: column;
+		width: 100vw;
+		height: 200vw;
+	}
 `;
-
 const LeftBox = styled.div`
 	background: #151515;
 	box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
@@ -105,18 +112,9 @@ const LeftBox = styled.div`
 	box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
 	width: 905px;
 	height: 100%;
-
-	h1 {
-		color: #ffffff;
-		font-size: 106px;
-		width: 233px;
-		font-weight: 700;
-		margin-top: 301px;
-		margin-left: 144px;
-		font-family: "Passion One", cursive;
-		line-height: 116.71px;
-		letter-spacing: 5px;
-		margin-bottom: 0px;
+	@media (max-width: 375px) {
+		width: 100vw;
+		height: 60vw;
 	}
 	h1 {
 		color: #ffffff;
@@ -129,8 +127,11 @@ const LeftBox = styled.div`
 		line-height: 116.71px;
 		letter-spacing: 5px;
 		margin-bottom: 0px;
+		@media (max-width: 375px) {
+			margin-top: 2vw;
+			font-size: 50px;
+		}
 	}
-
 	h2 {
 		color: #ffffff;
 		height: 128px;
@@ -141,9 +142,17 @@ const LeftBox = styled.div`
 		line-height: 63.73px;
 		margin-left: 144px;
 		margin-top: 0px;
+		@media (max-width: 375px) {
+			width: 55vw;
+			margin-top: -10vw;
+			font-size: 18px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-left: 27vw;
+		}
 	}
 `;
-
 const DirectBox = styled.div`
 	background-color: gray;
 	width: 535px;
@@ -155,6 +164,10 @@ const DirectBox = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
+	@media (max-width: 375px) {
+		width: 100vw;
+		height: 150vw;
+	}
 `;
 
 const Input = styled.input`
@@ -176,8 +189,10 @@ const Input = styled.input`
 	color: #9f9f9f;
 	font-size: 20px;
 	font-family: "Oswald", sans-serif;
+	@media (max-width: 375px) {
+		width: 70vw;
+	}
 `;
-
 const Box = styled.div`
 	display: flex;
 	justify-content: center;
@@ -185,14 +200,8 @@ const Box = styled.div`
 	text-align: center;
 	margin-top: 310px;
 	flex-direction: column;
-
-	h3 {
-		color: #ffffff;
-		font-family: "Lato", sans-serif;
-		font-size: 20px;
-		font-weight: 400;
-		line-height: 24px;
-		text-decoration-line: underline;
+	@media (max-width: 375px) {
+		margin-top: 10vw;
 	}
 	h3 {
 		color: #ffffff;
@@ -201,8 +210,12 @@ const Box = styled.div`
 		font-weight: 400;
 		line-height: 24px;
 		text-decoration-line: underline;
+		@media (max-width: 375px) {
+			width: 75vw;
+			font-size: 13px;
+			margin-top: 5vw;
+		}
 	}
-
 	button {
 		background-color: #1877f2;
 		width: 450px;
@@ -218,5 +231,8 @@ const Box = styled.div`
 		justify-content: center;
 		align-items: center;
 		margin-left: 44px;
+		@media (max-width: 375px) {
+			width: 77vw;
+		}
 	}
 `;

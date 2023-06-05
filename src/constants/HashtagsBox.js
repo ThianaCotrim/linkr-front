@@ -1,19 +1,32 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import hashtagContext from "../context/hashtag.context";
 
 export default function HashtagsBox() {
 	const [topHashtags, setTopHashtags] = useState([]);
 	const PORT = "http://localhost:5000";
+	const navigate = useNavigate();
+	const { setHashtagsInfo, setHashtagTitle } = useContext(hashtagContext);
 	useEffect(() => {
 		axios
 			.get(`${PORT}/hashtag`)
 			.then((r) => {
-				console.log(r.data);
 				setTopHashtags(r.data);
 			})
 			.catch((e) => console.log(e));
-	}, [topHashtags]);
+	}, []);
+	function specificPage(hashtag) {
+		axios
+			.get(`${PORT}/hashtag/${hashtag}`)
+			.then((r) => {
+				setHashtagsInfo(r.data);
+				setHashtagTitle(hashtag);
+				navigate(`/hashtag/${hashtag}`);
+			})
+			.catch((e) => console.log(e));
+	}
 	return (
 		<HashtagsStyle>
 			<div>
@@ -23,7 +36,12 @@ export default function HashtagsBox() {
 				{topHashtags.length === 0 ? (
 					<p>Sem trendings</p>
 				) : (
-					topHashtags.map((h, index) => <li key={index}> {h.hashtag}</li>)
+					topHashtags.map((h, index) => (
+						<li key={index} onClick={() => specificPage(h.hashtag)}>
+							{" "}
+							{h.hashtag}
+						</li>
+					))
 				)}
 			</ul>
 		</HashtagsStyle>
@@ -38,6 +56,8 @@ const HashtagsStyle = styled.div`
 	background: #171717;
 	border-radius: 16px;
 	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
 	div {
 		width: 100%;
 		height: 15%;
@@ -72,6 +92,7 @@ const HashtagsStyle = styled.div`
 				content: "#";
 				margin-right: 2px;
 			}
+			cursor: pointer;
 		}
 		p {
 			color: white;
