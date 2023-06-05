@@ -63,6 +63,7 @@ export default function LoginPage() {
 							placeholder="e-mail"
 							type="email"
 							name="email"
+							data-test="email"
 							value={form.email}
 							onChange={handleForm}
 						/>
@@ -71,15 +72,16 @@ export default function LoginPage() {
 							placeholder="password"
 							type="password"
 							name="password"
+							data-test="password"
 							value={form.password}
 							onChange={handleForm}
 						/>
-						<button type="submit" disabled={isSubmit}>
+						<button data-test="login-btn" type="submit" disabled={isSubmit}>
 							{" "}
 							{isSubmit ? "Enviando..." : "Log In"}
 						</button>
 					</form>
-					<Link to="/registration">
+					<Link to="/registration"  data-test="sign-up-link">
 						<h3>First time? Create an account!</h3>
 					</Link>
 				</Box>
