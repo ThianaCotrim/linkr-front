@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+<<<<<<< HEAD
 export default function RegistrationPage(){
 
     const [form, setForm] = useState({email: "", password: "", name:"", profileImage: ""})
@@ -81,6 +82,101 @@ export default function RegistrationPage(){
           </DirectBox>
         </Container>
     )
+=======
+export default function RegistrationPage() {
+	const [form, setForm] = useState({
+		email: "",
+		password: "",
+		name: "",
+		profileImage: "",
+	});
+	const [isSubmit, setIsSubmit] = useState(false);
+	const navigate = useNavigate();
+	function handleForm(e) {
+		setForm({ ...form, [e.target.name]: e.target.value });
+	}
+	function submitForm(e) {
+		e.preventDefault();
+		if (
+			form.email === "" ||
+			form.password === "" ||
+			form.name === "" ||
+			form.profileImage === ""
+		) {
+			return alert("Todos os campos são obrigatórios!");
+		}
+		const url = "http://localhost:5000/singup";
+		setIsSubmit(true);
+		axios
+			.post(url, form)
+			.then((res) => navigate("/"))
+			.catch((err) =>
+				alert("Esse e-mail já existe, faça login ou tente outro e-mail!")
+			)
+			.finally(() => {
+				setIsSubmit(false);
+			});
+	}
+	return (
+		<>
+			<Container>
+				<LeftBox>
+					<h1>linkr</h1>
+					<h2>save, share and discover the best links on the web</h2>
+				</LeftBox>
+				<DirectBox>
+					<Box>
+						<form onSubmit={submitForm}>
+							<Input
+								placeholder="e-mail"
+								type="email"
+								autoComplete="email"
+								data-test="email"
+								name="email"
+								value={form.email}
+								onChange={handleForm}
+							/>
+							<Input
+								placeholder="password"
+								type="password"
+								name="password"
+								data-test="password"
+								value={form.password}
+								onChange={handleForm}
+							/>
+							<Input
+								placeholder="username"
+								type="text"
+								name="name"
+								data-test="username"
+								value={form.name}
+								onChange={handleForm}
+							/>
+							<Input
+								placeholder="picture url"
+								type="url"
+								name="profileImage"
+								data-test="picture-url"
+								value={form.profileImage}
+								onChange={handleForm}
+							/>
+							<button data-test="sing-up-btn" type="submit" disabled={isSubmit}>
+								{" "}
+								{isSubmit ? "Enviando..." : "Sing Up"}
+							</button>
+						</form>
+						<Link  data-test="login-link"  to="/">
+							<h3>Switch back to log in</h3>
+						</Link>
+					</Box>
+				</DirectBox>
+			</Container>
+			<Link  data-test="login-link"  to="/">
+				<h3>Switch back to log in</h3>
+			</Link>
+		</>
+	);
+>>>>>>> 183888a31564693d71c554331ae7657359bdc75c
 }
 
 const Container = styled.div`

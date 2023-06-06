@@ -12,9 +12,9 @@ export default function SpecificHashtagTimeline() {
 			<Header />
 			<Container>
 				<div>
-					<h1># {hashtagTitle}</h1>
+					<h1 data-test="hashtag-title"># {hashtagTitle}</h1>
 					{hashtagsInfo.map((p, index) => (
-						<PostDiv key={index}>
+						<PostDiv  data-test="post" key={index}>
 							<ProfileInfo>
 								<img src={p.profileImage} alt="profileImage" />
 								<AiOutlineHeart
