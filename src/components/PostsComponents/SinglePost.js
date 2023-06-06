@@ -26,6 +26,9 @@ export default function SinglePost({ post }) {
 		metadescript,
 		metaimage,
 	} = post;
+	const [heart, setHeart] = useState('heart-outline')
+	const [lik, setLik] = useState(post.likes)
+	const [cor, setCor] = useState (false)
 	const [isEditing, setIsEditing] = useState(false);
 	const [isPostClicked, setIsPostClicked] = useState(false);
 	const [hasClicked, setHasClicked] = useState(true);
@@ -66,13 +69,29 @@ export default function SinglePost({ post }) {
 			})
 			.catch((e) => console.log(e));
 	}
-	return (
+
+	const like = () => {
+		if (heart === 'heart-outline'){
+            setHeart('heart')
+			setCor(true)
+			setLik(lik + 1);
+			
+		} else {
+			setHeart('heart-outline')
+			setCor(false)
+			setLik(lik - 1);
+			
+		}
+	}
+	return ( 
 		<ContainerSinglePost>
 			<Post data-test="post">
 				<SideBar>
 					<ProfilePhoto src={image} />
 					<AiOutlineComment color="white" onClick={() => setAllComments(!allComents)} data-test="comment-btn" />
 					<p data-test="comment-counter">{commnetCounter} comments</p>
+					<ion-icon style={cor ? { color: "red" } : { color: "white" }} onClick={like} name={heart}></ion-icon>
+					{lik} likes
 				</SideBar>
 				<ContentBox>
 					<PostTop>
@@ -167,6 +186,17 @@ const SideBar = styled.div`
 	align-items: center;
 	padding: 17px;
 	padding-right: 0px;
+	color: white;
+
+	ion-icon{
+		font-size: 25px;
+		margin-bottom: 7px;
+		color: white;
+		:hover {
+		cursor: pointer;
+	}
+	}
+	
 `;
 const PostTop = styled.div`
 	width: 100%;

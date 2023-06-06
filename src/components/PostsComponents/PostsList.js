@@ -75,4 +75,5 @@ const MessageEmpty = styled.p`
 	font-family: "Lato";
 	font-size: 30px;
 	font-weight: 400;
+	
 `;
