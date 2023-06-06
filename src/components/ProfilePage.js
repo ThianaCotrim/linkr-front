@@ -5,13 +5,13 @@ import { useLocation } from "react-router-dom";
 
 export default function ProfilePage() {
   const location = useLocation();
-  const { username, image, id } = location.state;
+  const { username, profileImage, id } = location.state;
 
   return (
     <>
       <MainContainer>
         <Container>
-          <ProfilePhoto src={image} alt={username} />
+          <ProfilePhoto src={profileImage} alt={username} />
           <MainTitle>{username}'s posts</MainTitle>
         </Container>
         <PostsListContainer>

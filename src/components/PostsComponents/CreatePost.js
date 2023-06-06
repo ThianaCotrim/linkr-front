@@ -131,6 +131,7 @@ const InputLink = styled.input`
 	}
 `;
 const InputDescription = styled.textarea`
+
 	width: 100%;
 	height: 66px;
 	border-radius: 5px;

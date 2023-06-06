@@ -47,6 +47,7 @@ const TimelineContainer = styled.div`
   flex-direction: column;
 `;
 const MainTitle = styled.p`
+
   font-family: "Oswald";
   font-weight: 700;
   font-size: 43px;
