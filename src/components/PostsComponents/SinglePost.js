@@ -7,8 +7,12 @@ import DeletePost from "./DeletePost";
 import hashtagContext from "../../context/hashtag.context";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AiOutlineComment } from 'react-icons/ai';
 
 export default function SinglePost({ post }) {
+
+	const [allComents, setAllComments] = useState(false);
+    const [commnetCounter, setCommentCounter] = useState(Number(post.comments));
 	const { setHashtagsInfo, setHashtagTitle } = useContext(hashtagContext);
 	const navigate = useNavigate();
 	const {
@@ -67,6 +71,8 @@ export default function SinglePost({ post }) {
 			<Post data-test="post">
 				<SideBar>
 					<ProfilePhoto src={image} />
+					<AiOutlineComment color="white" onClick={() => setAllComments(!allComents)} data-test="comment-btn" />
+					<p data-test="comment-counter">{commnetCounter} comments</p>
 				</SideBar>
 				<ContentBox>
 					<PostTop>
