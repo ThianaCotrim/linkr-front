@@ -54,6 +54,7 @@ export default function SinglePost({ post }) {
 	const handleMetaClick = () => {
 		window.open(link, "_blank");
 	};
+	
 	function specificPage(hashtag) {
 		const PORT = "http://localhost:5000";
 		axios

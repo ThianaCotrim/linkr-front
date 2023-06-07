@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, { useState, useRef } from "react";
 import axios from "axios";
 
-function EditPost({ id, description }) {
+function EditPost({ id, description, onCancel }) {
   const token = localStorage.getItem("userToken");
   const [text, setText] = useState(description);
   const [isSaving, setIsSaving] = useState(false);
@@ -15,6 +15,7 @@ function EditPost({ id, description }) {
       saveChanges();
     } else if (event.key === "Escape") {
       event.preventDefault();
+      onCancel();
     }
   };
 
@@ -22,13 +23,17 @@ function EditPost({ id, description }) {
     try {
       setIsSaving(true);
       const url = `http://localhost:5000/posts/${id}`;
-      const headers = { headers: { authorization: `Bearer ${token}` } };
-      await axios.put(url, { id, description: text }, { headers });
+      const headers = { authorization: `Bearer ${token}` };
+      const updatedPost = {
+        description: text,
+      };
+      await axios.put(url, updatedPost, { headers });
       setIsSaving(false);
+      onCancel();
     } catch (error) {
       console.error(error);
       setIsSaving(false);
-      setError("Não foi possível salvar as alterações. Por favor, tente novamente.");
+      setError("It was not possible to save the changes. Please try again.");
     }
   };
 
@@ -46,7 +51,7 @@ function EditPost({ id, description }) {
         disabled={isSaving}
         autoFocus
       />
-      {error && <p>{error}</p>}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
     </>
   );
 }
@@ -64,6 +69,13 @@ const TextArea = styled.textarea`
     outline: none;
     border: none;
   }
+`;
+
+const ErrorMessage = styled.p`
+  color: #ffbf00;
+  text-align: center;
+  font-size: 16px;
+  margin-top: 10px;
 `;
 
 export default EditPost;

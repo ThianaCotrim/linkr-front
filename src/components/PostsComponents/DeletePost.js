@@ -9,8 +9,15 @@ function DeletePost({ id, onCancel, isModalOpen }) {
   async function handleConfirmDelete() {
     try {
       setIsDeleting(true);
-      await axios.delete(`http://localhost:5000/posts/${id}`);
+
+      const token = localStorage.getItem("userToken");
+      await axios.delete(`http://localhost:5000/posts/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setIsDeleting(false);
+      window.location.reload(true);
       onCancel();
     } catch (error) {
       console.error(error);
@@ -33,7 +40,9 @@ function DeletePost({ id, onCancel, isModalOpen }) {
     >
       <ModalTitle>Are you sure you want to delete this post?</ModalTitle>
       <ButtonContainer>
-        <CancelButton onClick={handleCancelDelete} data-test="cancel">No, go back</CancelButton >
+        <CancelButton onClick={handleCancelDelete} data-test="cancel">
+          No, go back
+        </CancelButton>
         <DeleteButton onClick={handleConfirmDelete} disabled={isDeleting} data-test="confirm">
           {isDeleting ? <div className="loading" /> : "Yes, delete it"}
         </DeleteButton>
