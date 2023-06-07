@@ -8,13 +8,18 @@ import SinglePost from "./SinglePost.js";
 
 export default function PostsList() {
 	const [postList, setPostList] = useState(null);
+	const [followings, setFollowings] = useState(null)
 	const token = localStorage.getItem("userToken");
 	useEffect(() => {
 		const url = `http://localhost:5000/posts`;
 		const headers = { headers: { authorization: `Bearer ${token}` } };
 		axios
 			.get(url, headers)
-			.then((res) => setPostList(res.data))
+			.then((res) => {
+				const {posts, followings} = res.data
+				setPostList(posts)
+				setFollowings(followings)
+			})
 			.catch((err) =>
 				alert(
 					"An error occured while trying to fetch the posts, please refresh the page"
@@ -24,9 +29,17 @@ export default function PostsList() {
 	return (
 		<PostListContainer>
 			{postList ? (
-				postList.length === 0 ? (
-					<MessageEmpty>There are no posts yet</MessageEmpty>
-				) : (
+				postList.length === 0 && followings.length === 0 ? 
+				(
+					<MessageEmpty data-test="message">You don't follow anyone yet. Search for new friends!</MessageEmpty>
+				) : postList.length === 0 && followings.length > 0 ?
+				(
+					<MessageEmpty data-test="message">
+						No posts found from your friends
+					</MessageEmpty>
+				)
+				:
+				(
 					postList.map((post, index) => {
 						return <SinglePost key={index} post={post} />;
 					})
