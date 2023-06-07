@@ -64,12 +64,14 @@ export default function SearchUsers({ searchQuery, setSearchQuery }) {
       </SearchArea>
 
       {isLoading ? (
-        <p>Loading...</p>
+        <LoadingContainer>
+          <LoadingSpinner />
+        </LoadingContainer>
       ) : (
         <UserList>
           {searchResults.map((user) => (
             <UserItem key={user.id} data-test="user-search">
-              <UserImage src={user.profileImage} alt="" width={39} height={39} />
+              <UserImage src={user.profileImage} alt="erro" />
               <UserName>{user.name}</UserName>
             </UserItem>
           ))}
@@ -91,6 +93,7 @@ const Input = styled(DebounceInput)`
   padding-left: 7px;
   padding-right: 40px;
   border: none;
+  box-sizing: border-box;
 
   ::placeholder {
     color: #c6c6c6;
@@ -116,9 +119,8 @@ const UserList = styled.ol`
   background-color: #e7e7e7;
   border-radius: 8px;
   position: absolute;
-  top: 41px;
+  top: 50px;
   width: 100%;
-  max-width: 620px;
   left: 0;
 `;
 
@@ -127,17 +129,19 @@ const UserItem = styled.li`
   align-items: center;
   padding: 10px;
   cursor: pointer;
+  height: 40px;
 `;
 
 const UserImage = styled.img`
-  width: 39px;
-  height: 39px;
-  border-radius: 50%;
+  width: 39px !important;
+  height: 39px !important;
+  border-radius: 26.5px;
   margin-right: 10px;
 `;
 
 const UserName = styled.span`
-  font-size: 16px;
+  font-size: 18px;
+  margin-left: 10px;
   color: #333;
 `;
 
@@ -147,4 +151,30 @@ const SearchArea = styled.div`
 
 const InputContainer = styled.div`
   position: relative;
+`;
+
+const LoadingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  padding-left: 10px;
+`;
+
+const LoadingSpinner = styled.div`
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 0.5s linear infinite;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 `;
