@@ -3,11 +3,17 @@ import axios from "axios";
 import styled from "styled-components";
 import { DebounceInput } from "react-debounce-input";
 import { RxMagnifyingGlass } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchUsers({ searchQuery, setSearchQuery }) {
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState("");
+  const navigate = useNavigate();
+
+  const handleUserClick = (userId) => {
+    navigate(`/users/${userId}`);
+  };
 
   useEffect(() => {
     const storedToken = localStorage.getItem("userToken");
@@ -72,7 +78,7 @@ export default function SearchUsers({ searchQuery, setSearchQuery }) {
           {searchResults.map((user) => (
             <UserItem key={user.id} data-test="user-search">
               <UserImage src={user.profileImage} alt="erro" />
-              <UserName>{user.name}</UserName>
+              <UserName onClick={() => handleUserClick(user.id)}>{user.name}</UserName>
             </UserItem>
           ))}
         </UserList>
