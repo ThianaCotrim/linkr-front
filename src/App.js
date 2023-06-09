@@ -26,7 +26,7 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/registration" element={<RegistrationPage />} />
           <Route path="/timeline" element={<TimelinePage />} />
-          <Route path="/user/:id" element={<ProfilePage />} />
+          <Route path="/users/:id" element={<ProfilePage />} />
           <Route path="/hashtag/:hashtag" element={<SpecificHashtagTimeline />} />
         </Routes>
       </BrowserRouter>

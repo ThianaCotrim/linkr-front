@@ -52,7 +52,7 @@ const HashtagsStyle = styled.div`
 	width: 301px;
 	height: 406px;
 	right: 16.4%;
-	top: 21.5%;
+	top: 25%;
 	background: #171717;
 	border-radius: 16px;
 	box-sizing: border-box;

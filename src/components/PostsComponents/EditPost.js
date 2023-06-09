@@ -2,11 +2,12 @@ import styled from "styled-components";
 import React, { useState, useRef } from "react";
 import axios from "axios";
 
-function EditPost({ id, description, onCancel }) {
+export default function EditPost({ id, description, onCancel }) {
   const token = localStorage.getItem("userToken");
   const [text, setText] = useState(description);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState(null);
+  const [isEditing, setIsEditing] = useState(true);
   const inputRef = useRef(null);
 
   const handleKeyDown = (event) => {
@@ -23,13 +24,14 @@ function EditPost({ id, description, onCancel }) {
     try {
       setIsSaving(true);
       const url = `http://localhost:5000/posts/${id}`;
-      const headers = { authorization: `Bearer ${token}` };
+      const headers = { Authorization: `Bearer ${token}` };
       const updatedPost = {
         description: text,
       };
       await axios.put(url, updatedPost, { headers });
       setIsSaving(false);
-      onCancel();
+      setIsEditing(false);
+      console.log("Changes saved successfully");
     } catch (error) {
       console.error(error);
       setIsSaving(false);
@@ -40,6 +42,23 @@ function EditPost({ id, description, onCancel }) {
   const handleInputChange = (event) => {
     setText(event.target.value);
   };
+
+  if (!isEditing) {
+    return (
+      <p
+        style={{
+          fontFamily: "Lato",
+          fontWeight: "400",
+          fontSize: "17px",
+          lineHeight: "20px",
+          letterSpacing: "0.05em",
+          color: "#FFFFFF",
+        }}
+      >
+        {text}
+      </p>
+    );
+  }
 
   return (
     <>
@@ -77,5 +96,3 @@ const ErrorMessage = styled.p`
   font-size: 16px;
   margin-top: 10px;
 `;
-
-export default EditPost;
